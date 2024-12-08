@@ -113,36 +113,32 @@ body {
         transform: translateY(0);
     }
 }
-
-/* Focus effect for buttons (when clicked or focused) */
 .start-menu-btn:focus {
     outline: none;
-    box-shadow: 0 0 15px rgba(227, 119, 219, 0.7); /* Add glow when focused */
+    box-shadow: 0 0 15px rgba(227, 119, 219, 0.7); 
 }
-
-/* Ensure hover and active states work correctly */
 .start-menu-btn:active {
-    transform: translateY(2px); /* Slight press effect */
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); /* Slight shadow press */
+    transform: translateY(2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); 
 }
 
 /* Leaderboard Container */
 .container-groups[data-group="leaderboard"] {
     text-align: center;
     padding: 25px;
-    background-color: rgba(255, 249, 175, 0.8); /* Light pastel yellow background */
+    background-color: rgba(255, 249, 175, 0.8); 
     border-radius: 16px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     margin: 30px;
     max-width: 600px;
     margin: 0 auto;
-    animation: fadeIn 1.5s ease-out; /* Fade in animation for the container */
+    animation: fadeIn 1.5s ease-out;
 }
 
 /* Leaderboard Title */
 .container-groups[data-group="leaderboard"] h2 {
     font-size: 3em;
-    color: #ff91a4; /* Soft pastel pink */
+    color: #ff91a4; 
     font-family: 'Comic Sans MS', cursive, sans-serif;
     text-shadow: 2px 2px 8px rgba(255, 105, 180, 0.5);
     margin-bottom: 15px;
@@ -161,7 +157,7 @@ body {
 .leaderboard-list li {
     font-size: 1.6em;
     padding: 20px;
-    background-color: #fffbf2; /* Light pastel pink */
+    background-color: #fffbf2;
     margin: 15px 0;
     border-radius: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -175,14 +171,14 @@ body {
 
 /* Hover Effect for Leaderboard Items */
 .leaderboard-list li:hover {
-    transform: scale(1.05); /* Slight grow effect */
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* Stronger shadow on hover */
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); 
 }
 
 /* Score Badge Styling */
 .player-score {
     font-size: 1.4em;
-    background-color: #ff91a4; /* Soft pink */
+    background-color: #ff91a4; 
     color: white;
     border-radius: 50px;
     padding: 8px 16px;
@@ -191,20 +187,18 @@ body {
     transition: background-color 0.3s ease;
 }
 
-/* Leaderboard Rank (Add cute star icons) */
+/* Leaderboard Rank */
 .leaderboard-list li::before {
-    content: "⭐"; /* Add star icon */
+    content: "⭐"; 
     margin-right: 12px;
     font-size: 1.8em;
-    color: #ff91a4; /* Same pastel pink as title */
+    color: #ff91a4; 
 }
 
-/* Alternate Row Color */
 .leaderboard-list li:nth-child(odd) {
-    background-color: #ffe6f7; /* Slightly darker pastel pink */
+    background-color: #ffe6f7; 
 }
 
-/* Fade In and Slide In Animations */
 @keyframes fadeIn {
     0% {
         opacity: 0;
@@ -225,7 +219,6 @@ body {
     }
 }
 
-/* Mobile-Friendly Adjustments */
 @media (max-width: 600px) {
     .container-groups[data-group="leaderboard"] {
         padding: 15px;
