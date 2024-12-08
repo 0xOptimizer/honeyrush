@@ -142,3 +142,120 @@ body {
         font-size: 2em;
     }
 }
+/* Leaderboard Container */
+.container-groups[data-group="leaderboard"] {
+    text-align: center;
+    padding: 25px;
+    background-color: rgba(255, 249, 175, 0.8); /* Light pastel yellow background */
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    margin: 30px;
+    max-width: 600px;
+    margin: 0 auto;
+    animation: fadeIn 1.5s ease-out; /* Fade in animation for the container */
+}
+
+/* Leaderboard Title */
+.container-groups[data-group="leaderboard"] h2 {
+    font-size: 3em;
+    color: #ff91a4; /* Soft pastel pink */
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    text-shadow: 2px 2px 8px rgba(255, 105, 180, 0.5);
+    margin-bottom: 15px;
+}
+
+/* Leaderboard List */
+.leaderboard-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+}
+
+/* Individual Leaderboard Items */
+.leaderboard-list li {
+    font-size: 1.6em;
+    padding: 20px;
+    background-color: #fffbf2; /* Light pastel pink */
+    margin: 15px 0;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #7a4c75;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: slideIn 0.6s ease-out;
+}
+
+/* Hover Effect for Leaderboard Items */
+.leaderboard-list li:hover {
+    transform: scale(1.05); /* Slight grow effect */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* Stronger shadow on hover */
+}
+
+/* Score Badge Styling */
+.player-score {
+    font-size: 1.4em;
+    background-color: #ff91a4; /* Soft pink */
+    color: white;
+    border-radius: 50px;
+    padding: 8px 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-weight: normal;
+    transition: background-color 0.3s ease;
+}
+
+/* Leaderboard Rank (Add cute star icons) */
+.leaderboard-list li::before {
+    content: "⭐"; /* Add star icon */
+    margin-right: 12px;
+    font-size: 1.8em;
+    color: #ff91a4; /* Same pastel pink as title */
+}
+
+/* Alternate Row Color */
+.leaderboard-list li:nth-child(odd) {
+    background-color: #ffe6f7; /* Slightly darker pastel pink */
+}
+
+/* Fade In and Slide In Animations */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateX(-30px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Mobile-Friendly Adjustments */
+@media (max-width: 600px) {
+    .container-groups[data-group="leaderboard"] {
+        padding: 15px;
+    }
+
+    .container-groups[data-group="leaderboard"] h2 {
+        font-size: 2.2em;
+    }
+
+    .leaderboard-list li {
+        font-size: 1.4em;
+    }
+
+    .player-score {
+        font-size: 1.2em;
+    }
+}
