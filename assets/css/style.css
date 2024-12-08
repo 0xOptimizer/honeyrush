@@ -80,68 +80,52 @@ body {
     display: inline-block;
     animation: wobble 12s infinite;
 }
-/* Leaderboard Container */
-.container-groups[data-group="leaderboard"] {
-    text-align: center;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 20px;
+/* Button Styling */
+.start-menu-btn {
+    border-radius: 16px;
+    width: clamp(200px, 275px, 375px);
+    margin-top: 12px;
+    font-size: 32px;
+    border: 1px solid gold;
+    background-color: rgba(227, 119, 219, 0.393);
+    color: #fff; /* White text */
+    font-family: 'Arial', sans-serif;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
 }
 
-/* Leaderboard Title */
-.container-groups[data-group="leaderboard"] h2 {
-    font-size: 2.5em;
-    margin-bottom: 20px;
-    color: #333;
-    font-weight: bold;
+/* Hover effect for Play and Leaderboard buttons */
+.start-menu-btn:hover {
+    background-color: rgba(227, 119, 219, 0.7); /* Slightly darker pink */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15); /* Soft shadow on hover */
+    transform: translateY(-5px); /* Slight lift effect */
+    animation: bounce 0.5s infinite alternate; /* Add bounce effect */
 }
 
-/* Leaderboard List */
-.leaderboard-list {
-    list-style-type: none;
-    padding: 0;
-}
-
-.leaderboard-list li {
-    font-size: 1.3em;
-    padding: 10px;
-    background-color: #fff;
-    margin: 10px 0;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-weight: bold;
-}
-
-/* Alternate row colors */
-.leaderboard-list li:nth-child(odd) {
-    background-color: #f9f9f9;
-}
-
-/* Player Score Styling */
-.player-score {
-    color: #28a745;
-}
-
-/* Style for the leaderboard item */
-.leaderboard-list li span.player-score {
-    font-weight: normal;
-}
-
-/* Mobile-friendly layout */
-@media (max-width: 600px) {
-    .leaderboard-list li {
-        font-size: 1.1em;
+/* Bounce Animation for buttons */
+@keyframes bounce {
+    0% {
+        transform: translateY(0);
     }
-
-    .container-groups[data-group="leaderboard"] h2 {
-        font-size: 2em;
+    50% {
+        transform: translateY(-5px);
+    }
+    100% {
+        transform: translateY(0);
     }
 }
+
+/* Focus effect for buttons (when clicked or focused) */
+.start-menu-btn:focus {
+    outline: none;
+    box-shadow: 0 0 15px rgba(227, 119, 219, 0.7); /* Add glow when focused */
+}
+
+/* Ensure hover and active states work correctly */
+.start-menu-btn:active {
+    transform: translateY(2px); /* Slight press effect */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); /* Slight shadow press */
+}
+
 /* Leaderboard Container */
 .container-groups[data-group="leaderboard"] {
     text-align: center;
