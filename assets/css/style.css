@@ -80,4 +80,65 @@ body {
     display: inline-block;
     animation: wobble 12s infinite;
 }
- 
+/* Leaderboard Container */
+.container-groups[data-group="leaderboard"] {
+    text-align: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+}
+
+/* Leaderboard Title */
+.container-groups[data-group="leaderboard"] h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #333;
+    font-weight: bold;
+}
+
+/* Leaderboard List */
+.leaderboard-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.leaderboard-list li {
+    font-size: 1.3em;
+    padding: 10px;
+    background-color: #fff;
+    margin: 10px 0;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+}
+
+/* Alternate row colors */
+.leaderboard-list li:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+/* Player Score Styling */
+.player-score {
+    color: #28a745;
+}
+
+/* Style for the leaderboard item */
+.leaderboard-list li span.player-score {
+    font-weight: normal;
+}
+
+/* Mobile-friendly layout */
+@media (max-width: 600px) {
+    .leaderboard-list li {
+        font-size: 1.1em;
+    }
+
+    .container-groups[data-group="leaderboard"] h2 {
+        font-size: 2em;
+    }
+}
