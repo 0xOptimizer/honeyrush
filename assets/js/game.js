@@ -474,6 +474,31 @@ $(document).ready(function() {
         }
     });
 
+    function repopulateLeaderboard() {
+        $.ajax({
+            url: 'http://honeyrush-api.tewi.club/api/score/get',
+            type: 'GET',
+            success: function(response) {
+                // Sort the scores by points in descending order
+                response.sort((a, b) => b.points - a.points);
+                
+                // Get the leaderboard container
+                const leaderboardList = $('.leaderboard-list');
+                leaderboardList.empty(); // Clear existing list
+                
+                // Populate with new data
+                response.forEach(player => {
+                    leaderboardList.append(
+                        `<li>${player.name}: <span class="player-score">${player.points}</span></li>`
+                    );
+                });
+            },
+            error: function(xhr) {
+                console.error('Error fetching leaderboard data:', xhr.responseText);
+            }
+        });
+    }    
+
     $('.submit_score-btn').on('click', function() {
         const name = $('input[name="name"]').val();
         $.ajax({
@@ -485,6 +510,15 @@ $(document).ready(function() {
              },
             success: function(response) {
                 console.log('Score submitted successfully:', response);
+                setTimeout(function() {
+                    $('.container-groups').fadeOut('fast');
+                }, 85);
+                setTimeout(function() {
+                    $(`.container-groups[data-group="start"]`).fadeIn('fast');
+                    $('.navigate-btn').attr('disabled', false);
+                    $('.page-groups').hide();
+                    paginateUpdate(`.container-groups[data-group="start"]`);
+                }, 300);
             },
             error: function(xhr) {
                 console.error('Submission failed:', xhr.responseText);
@@ -494,4 +528,5 @@ $(document).ready(function() {
     });
 
     createGrid();
+    repopulateLeaderboard();
 });
