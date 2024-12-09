@@ -519,6 +519,8 @@ $(document).ready(function() {
                     $('.page-groups').hide();
                     paginateUpdate(`.container-groups[data-group="start"]`);
                 }, 300);
+
+                repopulateLeaderboard();
             },
             error: function(xhr) {
                 console.error('Submission failed:', xhr.responseText);
