@@ -40,7 +40,7 @@ $(document).ready(function() {
                 duration: 0
             });
             paginateUpdate(`.container-groups[data-group="${group}"]`);
-        }, 145);
+        }, 300);
     });
     $('.paginate-btn').on('click', function() {
         // $('.paginate-btn').attr('disabled', true);

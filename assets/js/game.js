@@ -1,4 +1,5 @@
 function createFloatingText(text, x, y, options) {
+    console.log(`createFloatingText: ${text}`);
     // Default settings below!
     const settings = $.extend({
         color: "#000000",
@@ -7,11 +8,11 @@ function createFloatingText(text, x, y, options) {
         duration: 500,
         fadeOut: true,
         fadeOutDuration: 125,
-        direction: "up" // Options: "up", "down", "left", "right"
+        direction: "up" // Options: "up", "down", "left", "right", "none"
     }, options);
 
     const $floatingText = $("<div></div>")
-        .text(text)
+        .html(text)
         .css({
             position: "absolute",
             left: `${x}px`,
@@ -41,8 +42,11 @@ function createFloatingText(text, x, y, options) {
         case "right":
             transform = "translateX(50px)";
             break;
-        default:
+        case "up":
             transform = "translateY(-50px)";
+            break;
+        default:
+
     }
 
     // Trigger the animation after appending
@@ -70,6 +74,7 @@ function createFloatingText(text, x, y, options) {
 
 $(document).ready(function() {
     let playerPoints = 0;
+    let bees = 20;
 
     const gridWidth = 4;
     const gridHeight = 6;
@@ -79,9 +84,13 @@ $(document).ready(function() {
         { color: '#f9d7dd', img: 'assets/images/candy03.png' },
         { color: '#fae0e6', img: 'assets/images/candy04.png' },
         { color: '#EAA221', img: 'assets/images/candy05.png' },
-        { color: '#E66E4C', img: 'assets/images/candy06.png' },
-        { color: '#E45561', img: 'assets/images/candy07.png' },
-        { color: '#E0218C', img: 'assets/images/candy08.png' },
+        // { color: '#E66E4C', img: 'assets/images/candy06.png' },
+        // { color: '#E45561', img: 'assets/images/candy07.png' },
+        // { color: '#E0218C', img: 'assets/images/candy08.png' },
+    ];
+    const powerupData = [
+        { color: 'cyan', img: 'assets/images/powerup01.png', special: 'down' },
+        { color: 'cyan', img: 'assets/images/powerup02.png', special: 'refill' },
     ];
     const hexSize = 50;
     const hexWidth = Math.sqrt(3) * hexSize;
@@ -91,7 +100,7 @@ $(document).ready(function() {
         const grid = $('#grid');
         for (let row = 0; row < gridHeight; row++) {
             for (let col = 0; col < gridWidth; col++) {
-                const candyInfo = getRandomCandy();
+                let candyInfo = getRandomCandy();
                 let candy = $('<div></div>')
                     .addClass('candy')
                     .attr('data-row', row)
@@ -124,11 +133,16 @@ $(document).ready(function() {
         return candyData[Math.floor(Math.random() * candyData.length)];
     }
 
+    function getRandomPowerup() {
+        return powerupData[Math.floor(Math.random() * powerupData.length)];
+    }
+
     function updateTile(tile, candy) {
         $(tile).data('candy', candy);
+        $(tile).data('special', candy.special || null);
         $(tile).css('background-color', candy.color);
         $(tile).find('img').attr('src', candy.img).attr('alt', candy.color);
-    }
+    }    
 
     function swapTiles(first, second) {
         const firstCandy = $(first).data('candy');
@@ -142,6 +156,56 @@ $(document).ready(function() {
         playerPoints += amount;
         $('.points').text(playerPoints);
     }
+
+    function checkBees() {
+        $('.bees').text(bees.toString());
+        setTimeout(function() {
+            if (bees <= 0) {
+                setTimeout(function() {
+                    $('.container-groups').fadeOut('fast');
+                }, 85);
+                setTimeout(function() {
+                    $(`.container-groups[data-group="save"]`).fadeIn('fast');
+                    $('.navigate-btn').attr('disabled', false);
+                    $('.page-groups').hide();
+                    paginateUpdate(`.container-groups[data-group="save"]`);
+                }, 300);
+            }
+        }, 400);
+    }
+
+    function activatePowerup(tile, special) {
+        let points = 0;
+
+        if (special === 'down') {
+            const row = parseInt(tile.data('row'));
+            const col = parseInt(tile.data('col'));
+    
+            for (let r = row + 1; r < gridHeight; r++) {
+                const belowTile = $(`[data-row=${r}][data-col=${col}]`);
+                if (belowTile.length) {
+                    const tileOffset = belowTile.offset();
+                    const x = tileOffset.left + 25;
+                    const y = tileOffset.top + 50;
+                    const x_ex = tileOffset.left - 10;
+                    const y_ex = tileOffset.top - 10;
+    
+                    setTimeout(() => {
+                        points += 50;
+                        updatePoints(points);
+                        
+                        createFloatingText(`<img src="assets/images/smoke_vectorsmarket15.png" width="128" height="128">`, x_ex, y_ex, {direction: "none"});
+                        createFloatingText(`+${points.toString()}`, x, y);
+    
+                        belowTile.fadeOut(300, function () {
+                            updateTile(belowTile, getRandomCandy());
+                            belowTile.fadeIn(300);
+                        });
+                    }, (r - row) * 500); // Delay for sequential effect
+                }
+            }
+        }
+    }    
 
     function checkMatches() {
         let matched = false;
@@ -195,6 +259,8 @@ $(document).ready(function() {
                     const belowA = $(`[data-row=${row + 1}][data-col=${col}]`);
 
                     if (aboveA.length && aboveA.data('candy') === centerColor) {
+                        let candyCounter = 0;
+
                         matched = true;
                         matchedTiles.push(A[0], B[0], aboveA[0]);
                         [A, B, aboveA].forEach(tile => {
@@ -206,9 +272,26 @@ $(document).ready(function() {
                             createFloatingText(`+${points.toString()}`, x, y);
                             updatePoints(points);
 
-                            const newCandy = getRandomCandy();
+                            candyCounter++;
+                            let newCandy;
+                            let isPowerup = false;
+                            if (candyCounter === 3) {
+                                newCandy = getRandomPowerup();
+                                candyCounter = 0;
+                                isPowerup = true;
+                            } else {
+                                newCandy = getRandomCandy();
+                            }
+                            console.table('tile', tile);
+                            if (tile.data('special')) {
+                                console.table('tile.special', tile.data('special'));
+                                // activatePowerup(tile, tile.special);
+                            }
                             tile.fadeOut(300, function () {
                                 updateTile(tile, newCandy);
+                                if (isPowerup) {
+                                    createFloatingText(`Special powerup!`, x, y);
+                                }
                                 tile.fadeIn(300);
                             });
                         });
@@ -216,6 +299,8 @@ $(document).ready(function() {
                     }
 
                     if (belowA.length && belowA.data('candy') === centerColor) {
+                        let candyCounter = 0;
+
                         matched = true;
                         matchedTiles.push(A[0], B[0], belowA[0]);
                         [A, B, belowA].forEach(tile => {
@@ -227,9 +312,26 @@ $(document).ready(function() {
                             createFloatingText(`+${points.toString()}`, x, y);
                             updatePoints(points);
 
-                            const newCandy = getRandomCandy();
+                            candyCounter++;
+                            let newCandy;
+                            let isPowerup = false;
+                            if (candyCounter === 3) {
+                                newCandy = getRandomPowerup();
+                                candyCounter = 0;
+                                isPowerup = true;
+                            } else {
+                                newCandy = getRandomCandy();
+                            }
+                            console.table('tile', tile);
+                            if (tile.data('special')) {
+                                console.table('tile.special', tile.data('special'));
+                                // activatePowerup(tile, tile.special);
+                            }
                             tile.fadeOut(300, function () {
                                 updateTile(tile, newCandy);
+                                if (isPowerup) {
+                                    createFloatingText(`Special powerup!`, x, y);
+                                }
                                 tile.fadeIn(300);
                             });
                         });
@@ -241,6 +343,8 @@ $(document).ready(function() {
                     const belowB = $(`[data-row=${row + 1}][data-col=${neighborCol}]`);
 
                     if (aboveB.length && aboveB.data('candy') === neighbor.data('candy')) {
+                        let candyCounter = 0;
+
                         matched = true;
                         matchedTiles.push(A[0], B[0], aboveB[0]);
                         [A, B, aboveB].forEach(tile => {
@@ -252,9 +356,26 @@ $(document).ready(function() {
                             createFloatingText(`+${points.toString()}`, x, y);
                             updatePoints(points);
 
-                            const newCandy = getRandomCandy();
+                            candyCounter++;
+                            let newCandy;
+                            let isPowerup = false;
+                            if (candyCounter === 3) {
+                                newCandy = getRandomPowerup();
+                                candyCounter = 0;
+                                isPowerup = true;
+                            } else {
+                                newCandy = getRandomCandy();
+                            }
+                            console.table('tile', tile);
+                            if (tile.data('special')) {
+                                console.table('tile.special', tile.data('special'));
+                                // activatePowerup(tile, tile.special);
+                            }
                             tile.fadeOut(300, function () {
                                 updateTile(tile, newCandy);
+                                if (isPowerup) {
+                                    createFloatingText(`Special powerup!`, x, y);
+                                }
                                 tile.fadeIn(300);
                             });
                         });
@@ -262,6 +383,8 @@ $(document).ready(function() {
                     }
 
                     if (belowB.length && belowB.data('candy') === neighbor.data('candy')) {
+                        let candyCounter = 0;
+
                         matched = true;
                         matchedTiles.push(A[0], B[0], belowB[0]);
                         [A, B, belowB].forEach(tile => {
@@ -273,9 +396,26 @@ $(document).ready(function() {
                             createFloatingText(`+${points.toString()}`, x, y);
                             updatePoints(points);
 
-                            const newCandy = getRandomCandy();
+                            candyCounter++;
+                            let newCandy;
+                            let isPowerup = false;
+                            if (candyCounter === 3) {
+                                newCandy = getRandomPowerup();
+                                candyCounter = 0;
+                                isPowerup = true;
+                            } else {
+                                newCandy = getRandomCandy();
+                            }
+                            console.table('tile', tile);
+                            if (tile.data('special')) {
+                                console.table('tile.special', tile.data('special'));
+                                // activatePowerup(tile, tile.special);
+                            }
                             tile.fadeOut(300, function () {
                                 updateTile(tile, newCandy);
+                                if (isPowerup) {
+                                    createFloatingText(`Special powerup!`, x, y);
+                                }
                                 tile.fadeIn(300);
                             });
                         });
@@ -291,6 +431,32 @@ $(document).ready(function() {
     let selectedTile = null;
 
     $('#grid').on('click', '.candy', function() {
+        const _this = $(this);
+        if ($(this).data('special')) {
+            const tileOffset = $(this).offset();
+            const x = tileOffset.left - 10;
+            const y = tileOffset.top - 10;
+
+            newCandy = getRandomCandy();
+
+            if ($(this).data('special') === 'down') {
+                createFloatingText(`<img src="assets/images/smoke_vectorsmarket15.png" width="128" height="128">`, x, y, {direction: "none"});
+                activatePowerup(_this, _this.data('special'));
+
+                _this.fadeOut(300, function () {
+                    updateTile(_this, newCandy);
+                    _this.fadeIn(300);
+                });
+            } else {
+                activatePowerup($(this), $(this).data('special'));
+
+                $(this).fadeOut(300, function () {
+                    updateTile($(this), newCandy);
+                    $(this).fadeIn(300);
+                });
+            }
+            return;
+        }
         if (!selectedTile) {
             selectedTile = this;
             $(this).addClass('selected');
@@ -302,7 +468,29 @@ $(document).ready(function() {
             checkMatches()
             $(selectedTile).removeClass('selected');
             selectedTile = null;
+
+            bees -= 1;
+            checkBees();
         }
+    });
+
+    $('.submit_score-btn').on('click', function() {
+        const name = $('input[name="name"]').val();
+        $.ajax({
+            url: 'http://honeyrush-api.tewi.club/api/score/submit', 
+            type: 'POST',
+            data: { 
+                name: name,
+                points: playerPoints
+             },
+            success: function(response) {
+                console.log('Score submitted successfully:', response);
+            },
+            error: function(xhr) {
+                console.error('Submission failed:', xhr.responseText);
+            }
+        });
+        
     });
 
     createGrid();

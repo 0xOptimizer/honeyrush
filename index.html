@@ -25,53 +25,69 @@
                 </button>
             </div>
             
-            </div>
-            </div>
+        </div>
+    </div>
             
-            <!-- Game container, hidden by default -->
-            <div class="container-groups" data-group="game" style="display: none;">
-                <div class="info">
-                    Points: <span class="points">0</span>
-                </div>
-                <div class="button-container">
-                    <button type="button" class="how_to_play-btn">
-                        ?
-                    </button>
-                </div>
-                <div id="grid"></div>
-            </div>
-            
-            <!-- Leaderboard container, hidden by default -->
-            <div class="container-groups" data-group="leaderboard" style="display: none;">
-                <h2>Leaderboard</h2>
-                <ul class="leaderboard-list">
-                    <li>Player 1: <span class="player-score">100</span></li>
-                    <li>Player 2: <span class="player-score">80</span></li>
-                    <li>Player 3: <span class="player-score">60</span></li>
-                    <li>Player 4: <span class="player-score">40</span></li>
-                    <li>Player 5: <span class="player-score">20</span></li>
-                </ul>
-            </div>
-            
-            <script>
-                // Script to handle the navigation between the game and leaderboard
-                const leaderboardBtn = document.querySelector('.start-menu-btn');
-                const leaderboardContainer = document.querySelector('[data-group="leaderboard"]');
-                const gameContainer = document.querySelector('[data-group="game"]');
-            
-                leaderboardBtn.addEventListener('click', function() {
-                    // Hide the game and show the leaderboard
-                    gameContainer.style.display = 'none';
-                    leaderboardContainer.style.display = 'block';
-                });
-            </script>
-            <!-- Background Music Audio -->
+    <!-- Game container, hidden by default -->
+    <div class="container-groups" data-group="game" style="display: none;">
+        <div class="info">
+            Points: <span class="points">0</span> | Bees: <span class="bees">20</span>
+        </div>
+        <div class="button-container">
+            <button type="button" class="how_to_play-btn">
+                ?
+            </button>
+        </div>
+        <div id="grid"></div>
+    </div>
+    
+    <!-- Leaderboard container, hidden by default -->
+    <div class="container-groups" data-group="leaderboard" style="display: none;">
+        <h2>Leaderboard</h2>
+        <ul class="leaderboard-list">
+            <li>Player 1: <span class="player-score">100</span></li>
+            <li>Player 2: <span class="player-score">80</span></li>
+            <li>Player 3: <span class="player-score">60</span></li>
+            <li>Player 4: <span class="player-score">40</span></li>
+            <li>Player 5: <span class="player-score">20</span></li>
+        </ul>
+    </div>
+
+    <!-- Input name -->
+    <div class="container-groups" data-group="save" style="display: none;">
+        <div class="info">
+            <label>Your name:</label>
+            <input type="text" name="name">
+        </div>
+        <div class="button-container">
+            <button type="button" class="submit_score-btn">
+                Submit Score!
+            </button>
+        </div>
+        <div id="grid"></div>
+    </div>
+    
+    <!-- <script>
+        // Script to handle the navigation between the game and leaderboard
+        const leaderboardBtn = document.querySelector('.start-menu-btn');
+        const leaderboardContainer = document.querySelector('[data-group="leaderboard"]');
+        const gameContainer = document.querySelector('[data-group="game"]');
+    
+        leaderboardBtn.addEventListener('click', function() {
+            // Hide the game and show the leaderboard
+            gameContainer.style.display = 'none';
+            leaderboardContainer.style.display = 'block';
+        });
+    </script> -->
+    <!-- Background Music Audio -->
     <audio id="background-music" loop>
         <source src="assets/bg music/Festive Mixtape.mp3" type="audio/mpeg">
     </audio>
 
+    <audio id="megumin" src="assets/audio/megumin.mp3" preload="auto"></audio>
+
     <!-- Button to toggle music -->
-    <button id="music-toggle" class="music-button">Turn On Music</button>
+    <!-- <button id="music-toggle" class="music-button">Turn On Music</button> -->
             
 
 

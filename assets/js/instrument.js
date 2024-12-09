@@ -6,15 +6,11 @@ const music = document.getElementById("background-music");
 let musicPlaying = false; 
 
 // Function to toggle music play/pause
-musicToggleButton.addEventListener("click", () => {
-    if (musicPlaying) {
-        music.pause();
-        musicToggleButton.textContent = "Turn On Music";
-    } else {
+$(document).mousemove(function () {
+    if (!musicPlaying) {
+        musicPlaying = true;
         music.play().catch(error => {
             console.error("Error playing music: ", error);
         });
-        musicToggleButton.textContent = "Turn Off Music";
     }
-    musicPlaying = !musicPlaying;
 });
