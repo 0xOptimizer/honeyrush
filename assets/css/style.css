@@ -236,3 +236,28 @@ body {
         font-size: 1.2em;
     }
 }
+body {
+    background: rgb(255,249,175);
+    background: -moz-radial-gradient(circle, rgba(255,249,175,1) 23%, rgba(251,158,255,1) 54%, rgba(244,143,255,1) 91%);
+    background: -webkit-radial-gradient(circle, rgba(255,249,175,1) 23%, rgba(251,158,255,1) 54%, rgba(244,143,255,1) 91%);
+    background: radial-gradient(circle, rgba(255,249,175,1) 23%, rgba(251,158,255,1) 54%, rgba(244,143,255,1) 91%);
+}
+
+.music-button {
+    padding: 15px 30px;
+    font-size: 1.5em;
+    background-color:#ffe6f7;
+    border: none;
+    color: white;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.music-button:hover {
+    background-color: #ff91a4;
+}
+
+.music-button:focus {
+    outline: none;
+}
