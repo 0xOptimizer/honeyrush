@@ -261,3 +261,64 @@ body {
 .music-button:focus {
     outline: none;
 }
+/* Style for "Your Name" input */
+.container-groups[data-group="save"] .info label {
+    display: block;
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff6399;
+    margin-bottom: 10px;
+    text-align: center;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+
+.container-groups[data-group="save"] .info input[type="text"] {
+    width: 80%;
+    margin: 0 auto;
+    padding: 15px;
+    font-size: 18px;
+    border-radius: 20px;
+    border: 2px solid #ff91a4;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    color: #7a4c75;
+    font-family: 'Arial', sans-serif;
+    outline: none;
+    transition: all 0.3s ease-in-out;
+    display: block;
+    text-align: center;
+}
+
+.container-groups[data-group="save"] .info input[type="text"]:focus {
+    border-color: #ff6399;
+    box-shadow: 0 6px 12px rgba(255, 99, 153, 0.4);
+}
+
+/* Style for "Submit Score" button */
+.container-groups[data-group="save"] .button-container .submit_score-btn {
+    display: block;
+    margin: 20px auto;
+    padding: 15px 30px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #ff91a4;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.container-groups[data-group="save"] .button-container .submit_score-btn:hover {
+    background-color: #ff6399;
+    box-shadow: 0 6px 12px rgba(255, 99, 153, 0.4);
+    transform: scale(1.05);
+}
+
+.container-groups[data-group="save"] .button-container .submit_score-btn:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
