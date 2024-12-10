@@ -460,10 +460,18 @@ $(document).ready(function() {
         if (!selectedTile) {
             selectedTile = this;
             $(this).addClass('selected');
+
+            const sfx = button_click_soft_sfx.cloneNode(true);
+            sfx.volume = 0.33;
+            sfx.play();
         } else {
             if (selectedTile !== this) {
                 swapTiles(selectedTile, this);
             }
+
+            const sfx = button_click_sfx.cloneNode(true);
+            sfx.volume = 0.33;
+            sfx.play();
 
             checkMatches()
             $(selectedTile).removeClass('selected');

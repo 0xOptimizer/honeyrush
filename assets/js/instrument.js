@@ -1,16 +1,36 @@
-// Get the audio element and the toggle button
-const musicToggleButton = document.getElementById("music-toggle");
-const music = document.getElementById("background-music");
+const tracks = [
+    document.getElementById("bgm-festive_mixtape"),
+    document.getElementById("bgm-creme_brulee")
+];
 
-// Initially, try to play the music (browser might block it until user interacts)
-let musicPlaying = false; 
+let currentTrackIndex = 0;
 
-// Function to toggle music play/pause
+function playNextTrack() {
+    const currentTrack = tracks[currentTrackIndex];
+    currentTrack.currentTime = 0;
+    currentTrack.play();
+
+    currentTrack.onended = () => {
+        currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
+        playNextTrack();
+    };
+}
+
+let musicPlaying = false;
 $(document).mousemove(function () {
     if (!musicPlaying) {
         musicPlaying = true;
-        music.play().catch(error => {
-            console.error("Error playing music: ", error);
-        });
+        playNextTrack();
     }
+});
+
+const button_click_sfx = document.getElementById("button_click");
+const button_click_soft_sfx = document.getElementById("button_click_soft");
+
+$(document).ready(function() {
+    $('button').on('click', function() {
+        const sfx = button_click_sfx.cloneNode(true);
+        sfx.volume = 0.33;
+        sfx.play();
+    });
 });
