@@ -261,7 +261,6 @@ body {
 .music-button:focus {
     outline: none;
 }
-/* Style for "Your Name" input */
 .container-groups[data-group="save"] .info label {
     display: block;
     font-size: 24px;
@@ -321,4 +320,69 @@ body {
 .container-groups[data-group="save"] .button-container .submit_score-btn:active {
     transform: scale(0.95);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+.container-groups[data-group="save"] {
+    position: relative;
+    padding: 30px;
+    background-color: #ffebf0;
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+.container-groups[data-group="save"]::before,
+.container-groups[data-group="save"]::after {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background-color: #ffcb47;
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+.container-groups[data-group="save"]::before {
+    top: -20px;
+    left: -20px;
+}
+.container-groups[data-group="save"]::after {
+    top: -20px;
+    right: -20px;
+}
+.container-groups[data-group="game"] .info {
+    position: absolute;
+    left: 70px;
+    top: 1px;
+    background-color: #f9f3d7;
+    border: 2px solid #e0c97c;
+    border-radius: 10px;
+    padding: 10px;
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333333;
+    text-align: center;
+    width: 200px; /* Adjust based on your layout */
+    margin: 10px auto; /* Center alignment */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  .container-groups[data-group="game"] .info .points {
+    color: #ff8c00; /* Color for points */
+  }
+  .container-groups[data-group="game"] .info .bees {
+    color: #ffd700; /* Color for bees */
+  }
+  .how_to_play-btn {
+    background-color: #f9f3d7;
+    border: 2px solid #e0c97c;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 16px;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    color: #333333;
+    cursor: pointer;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+.how_to_play-btn:hover {
+    background-color: #e0c97c;
+    color: #fff;
 }
