@@ -476,7 +476,7 @@ $(document).ready(function() {
 
     function repopulateLeaderboard() {
         $.ajax({
-            url: 'http://honeyrush-api.tewi.club/api/score/get',
+            url: 'https://honeyrush-api.tewi.club/api/score/get',
             type: 'GET',
             success: function(response) {
                 // Sort the scores by points in descending order
@@ -502,7 +502,7 @@ $(document).ready(function() {
     $('.submit_score-btn').on('click', function() {
         const name = $('input[name="name"]').val();
         $.ajax({
-            url: 'http://honeyrush-api.tewi.club/api/score/submit', 
+            url: 'https://honeyrush-api.tewi.club/api/score/submit', 
             type: 'POST',
             data: { 
                 name: name,
