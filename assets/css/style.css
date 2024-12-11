@@ -23,6 +23,7 @@ body {
     height: 100%;
     transform: scale(clamp(75%, 100%, 100%));
     margin: 0 auto;
+    margin-left: -10px;
     display: block;
 }
 .candy {

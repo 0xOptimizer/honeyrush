@@ -2,8 +2,8 @@ function createFloatingText(text, x, y, options) {
     console.log(`createFloatingText: ${text}`);
     // Default settings below!
     const settings = $.extend({
-        color: "#000000",
-        fontSize: "16px",
+        color: "#fff",
+        fontSize: "24px",
         fontFamily: "Arial, sans-serif",
         duration: 500,
         fadeOut: true,
@@ -12,6 +12,7 @@ function createFloatingText(text, x, y, options) {
     }, options);
 
     const $floatingText = $("<div></div>")
+        .addClass('text-outlined')
         .html(text)
         .css({
             position: "absolute",
@@ -259,11 +260,10 @@ $(document).ready(function() {
                     const belowA = $(`[data-row=${row + 1}][data-col=${col}]`);
 
                     if (aboveA.length && aboveA.data('candy') === centerColor) {
-                        let candyCounter = 0;
-
                         matched = true;
                         matchedTiles.push(A[0], B[0], aboveA[0]);
                         [A, B, aboveA].forEach(tile => {
+                            const tileBGColor = $(tile).css('background-color');
                             const tileOffset = $(tile).offset();
                             const x = tileOffset.left + 25;
                             const y = tileOffset.top + 50;
@@ -272,12 +272,10 @@ $(document).ready(function() {
                             createFloatingText(`+${points.toString()}`, x, y);
                             updatePoints(points);
 
-                            candyCounter++;
                             let newCandy;
                             let isPowerup = false;
-                            if (candyCounter === 3) {
+                            if (Math.random() < 0.08) {
                                 newCandy = getRandomPowerup();
-                                candyCounter = 0;
                                 isPowerup = true;
                             } else {
                                 newCandy = getRandomCandy();
@@ -287,23 +285,33 @@ $(document).ready(function() {
                                 console.table('tile.special', tile.data('special'));
                                 // activatePowerup(tile, tile.special);
                             }
-                            tile.fadeOut(300, function () {
-                                updateTile(tile, newCandy);
-                                if (isPowerup) {
-                                    createFloatingText(`Special powerup!`, x, y);
-                                }
-                                tile.fadeIn(300);
-                            });
+                            setTimeout(function() {
+                                tile.css('background-color', 'gold');
+                            }, 75);
+                            setTimeout(function() {
+                                tile.css('background-color', tileBGColor);
+                            }, 150);
+                            setTimeout(function() {
+                                tile.css('background-color', 'gold');
+                            }, 225);
+                            setTimeout(function() {
+                                tile.fadeOut(150, function () {
+                                    updateTile(tile, newCandy);
+                                    if (isPowerup) {
+                                        createFloatingText(`Special powerup!`, x, y);
+                                    }
+                                    tile.fadeIn(150);
+                                });
+                            }, 300);
                         });
                         continue; // If a match is found, no need to check further
                     }
 
                     if (belowA.length && belowA.data('candy') === centerColor) {
-                        let candyCounter = 0;
-
                         matched = true;
                         matchedTiles.push(A[0], B[0], belowA[0]);
                         [A, B, belowA].forEach(tile => {
+                            const tileBGColor = $(tile).css('background-color');
                             const tileOffset = $(tile).offset();
                             const x = tileOffset.left + 25;
                             const y = tileOffset.top + 50;
@@ -312,12 +320,10 @@ $(document).ready(function() {
                             createFloatingText(`+${points.toString()}`, x, y);
                             updatePoints(points);
 
-                            candyCounter++;
                             let newCandy;
                             let isPowerup = false;
-                            if (candyCounter === 3) {
+                            if (Math.random() < 0.08) {
                                 newCandy = getRandomPowerup();
-                                candyCounter = 0;
                                 isPowerup = true;
                             } else {
                                 newCandy = getRandomCandy();
@@ -327,13 +333,24 @@ $(document).ready(function() {
                                 console.table('tile.special', tile.data('special'));
                                 // activatePowerup(tile, tile.special);
                             }
-                            tile.fadeOut(300, function () {
-                                updateTile(tile, newCandy);
-                                if (isPowerup) {
-                                    createFloatingText(`Special powerup!`, x, y);
-                                }
-                                tile.fadeIn(300);
-                            });
+                            setTimeout(function() {
+                                tile.css('background-color', 'gold');
+                            }, 75);
+                            setTimeout(function() {
+                                tile.css('background-color', tileBGColor);
+                            }, 150);
+                            setTimeout(function() {
+                                tile.css('background-color', 'gold');
+                            }, 225);
+                            setTimeout(function() {
+                                tile.fadeOut(150, function () {
+                                    updateTile(tile, newCandy);
+                                    if (isPowerup) {
+                                        createFloatingText(`Special powerup!`, x, y);
+                                    }
+                                    tile.fadeIn(150);
+                                });
+                            }, 300);
                         });
                         continue; // If a match is found, no need to check further
                     }
@@ -343,11 +360,10 @@ $(document).ready(function() {
                     const belowB = $(`[data-row=${row + 1}][data-col=${neighborCol}]`);
 
                     if (aboveB.length && aboveB.data('candy') === neighbor.data('candy')) {
-                        let candyCounter = 0;
-
                         matched = true;
                         matchedTiles.push(A[0], B[0], aboveB[0]);
                         [A, B, aboveB].forEach(tile => {
+                            const tileBGColor = $(tile).css('background-color');
                             const tileOffset = $(tile).offset();
                             const x = tileOffset.left + 25;
                             const y = tileOffset.top + 50;
@@ -356,12 +372,10 @@ $(document).ready(function() {
                             createFloatingText(`+${points.toString()}`, x, y);
                             updatePoints(points);
 
-                            candyCounter++;
                             let newCandy;
                             let isPowerup = false;
-                            if (candyCounter === 3) {
+                            if (Math.random() < 0.08) {
                                 newCandy = getRandomPowerup();
-                                candyCounter = 0;
                                 isPowerup = true;
                             } else {
                                 newCandy = getRandomCandy();
@@ -371,23 +385,33 @@ $(document).ready(function() {
                                 console.table('tile.special', tile.data('special'));
                                 // activatePowerup(tile, tile.special);
                             }
-                            tile.fadeOut(300, function () {
-                                updateTile(tile, newCandy);
-                                if (isPowerup) {
-                                    createFloatingText(`Special powerup!`, x, y);
-                                }
-                                tile.fadeIn(300);
-                            });
+                            setTimeout(function() {
+                                tile.css('background-color', 'gold');
+                            }, 75);
+                            setTimeout(function() {
+                                tile.css('background-color', tileBGColor);
+                            }, 150);
+                            setTimeout(function() {
+                                tile.css('background-color', 'gold');
+                            }, 225);
+                            setTimeout(function() {
+                                tile.fadeOut(150, function () {
+                                    updateTile(tile, newCandy);
+                                    if (isPowerup) {
+                                        createFloatingText(`Special powerup!`, x, y);
+                                    }
+                                    tile.fadeIn(150);
+                                });
+                            }, 300);
                         });
                         continue; // If a match is found, no need to check further
                     }
 
                     if (belowB.length && belowB.data('candy') === neighbor.data('candy')) {
-                        let candyCounter = 0;
-
                         matched = true;
                         matchedTiles.push(A[0], B[0], belowB[0]);
                         [A, B, belowB].forEach(tile => {
+                            const tileBGColor = $(tile).css('background-color');
                             const tileOffset = $(tile).offset();
                             const x = tileOffset.left + 25;
                             const y = tileOffset.top + 50;
@@ -396,12 +420,10 @@ $(document).ready(function() {
                             createFloatingText(`+${points.toString()}`, x, y);
                             updatePoints(points);
 
-                            candyCounter++;
                             let newCandy;
                             let isPowerup = false;
-                            if (candyCounter === 3) {
+                            if (Math.random() < 0.08) {
                                 newCandy = getRandomPowerup();
-                                candyCounter = 0;
                                 isPowerup = true;
                             } else {
                                 newCandy = getRandomCandy();
@@ -411,13 +433,24 @@ $(document).ready(function() {
                                 console.table('tile.special', tile.data('special'));
                                 // activatePowerup(tile, tile.special);
                             }
-                            tile.fadeOut(300, function () {
-                                updateTile(tile, newCandy);
-                                if (isPowerup) {
-                                    createFloatingText(`Special powerup!`, x, y);
-                                }
-                                tile.fadeIn(300);
-                            });
+                            setTimeout(function() {
+                                tile.css('background-color', 'gold');
+                            }, 75);
+                            setTimeout(function() {
+                                tile.css('background-color', tileBGColor);
+                            }, 150);
+                            setTimeout(function() {
+                                tile.css('background-color', 'gold');
+                            }, 225);
+                            setTimeout(function() {
+                                tile.fadeOut(150, function () {
+                                    updateTile(tile, newCandy);
+                                    if (isPowerup) {
+                                        createFloatingText(`Special powerup!`, x, y);
+                                    }
+                                    tile.fadeIn(150);
+                                });
+                            }, 300);
                         });
                         continue; // If a match is found, no need to check further
                     }
