@@ -99,6 +99,8 @@ $(document).ready(function() {
 
     function createGrid() {
         const grid = $('#grid');
+        let delay = 500;
+    
         for (let row = 0; row < gridHeight; row++) {
             for (let col = 0; col < gridWidth; col++) {
                 let candyInfo = getRandomCandy();
@@ -107,25 +109,32 @@ $(document).ready(function() {
                     .attr('data-row', row)
                     .attr('data-col', col)
                     .data('candy', candyInfo)
-                    .css('background-color', candyInfo.color)
                     .css({
+                        'background-color': candyInfo.color,
+                        'position': 'absolute',
                         'left': (col * hexWidth) + (row % 2 * hexWidth * 0.5),
-                        'top': row * (hexHeight * 0.75)
+                        'top': '-100px',
+                        'opacity': 0
                     })
                     .append(`<img src="${candyInfo.img}" alt="${candyInfo.color}">`);
+    
                 grid.append(candy);
-                // candy = $('<div></div>')
-                //     .addClass('candy')
-                //     .attr('data-row', row)
-                //     .attr('data-col', col)
-                //     .data('candy', candyInfo)
-                //     .css('background-color', candyInfo.color)
-                //     .css({
-                //         'left': (col * hexWidth) +  750,
-                //         'top': row * (hexHeight * 0.75)
-                //     })
-                //     .append(`<img src="${candyInfo.img}" alt="${candyInfo.color}">`);
-                // grid.append(candy);
+    
+                setTimeout(() => {
+                    candy.animate(
+                        {
+                            top: row * (hexHeight * 0.75),
+                            opacity: 1
+                        },
+                        {
+                            duration: 175,
+                            easing: 'easeOutCubic',
+                            queue: false
+                        }
+                    );
+                }, delay);
+    
+                delay += 33;
             }
         }
     }
@@ -200,7 +209,7 @@ $(document).ready(function() {
     
                         belowTile.fadeOut(300, function () {
                             updateTile(belowTile, getRandomCandy());
-                            belowTile.fadeIn(300);
+                            belowTile.fadeIn(75);
                         });
                     }, (r - row) * 500); // Delay for sequential effect
                 }
@@ -288,9 +297,9 @@ $(document).ready(function() {
                             tile.fadeOut(300, function () {
                                 updateTile(tile, newCandy);
                                 if (isPowerup) {
-                                    createFloatingText(`Special powerup!`, x, y);
+                                    createFloatingText(`Special!`, x, y);
                                 }
-                                tile.fadeIn(300);
+                                tile.fadeIn(75);
                             });
                         });
                         continue; // If a match is found, no need to check further
@@ -325,9 +334,9 @@ $(document).ready(function() {
                             tile.fadeOut(300, function () {
                                 updateTile(tile, newCandy);
                                 if (isPowerup) {
-                                    createFloatingText(`Special powerup!`, x, y);
+                                    createFloatingText(`Special!`, x, y);
                                 }
-                                tile.fadeIn(300);
+                                tile.fadeIn(75);
                             });
                         });
                         continue; // If a match is found, no need to check further
@@ -366,9 +375,9 @@ $(document).ready(function() {
                             tile.fadeOut(300, function () {
                                 updateTile(tile, newCandy);
                                 if (isPowerup) {
-                                    createFloatingText(`Special powerup!`, x, y);
+                                    createFloatingText(`Special!`, x, y);
                                 }
-                                tile.fadeIn(300);
+                                tile.fadeIn(75);
                             });
                         });
                         continue; // If a match is found, no need to check further
@@ -403,9 +412,9 @@ $(document).ready(function() {
                             tile.fadeOut(300, function () {
                                 updateTile(tile, newCandy);
                                 if (isPowerup) {
-                                    createFloatingText(`Special powerup!`, x, y);
+                                    createFloatingText(`Special!`, x, y);
                                 }
-                                tile.fadeIn(300);
+                                tile.fadeIn(75);
                             });
                         });
                         continue; // If a match is found, no need to check further
@@ -526,6 +535,8 @@ $(document).ready(function() {
         
     });
 
-    createGrid();
+    $('.start-menu-btn[data-group="game"]').on('click', function() {
+        createGrid();
+    });
     repopulateLeaderboard();
 });
