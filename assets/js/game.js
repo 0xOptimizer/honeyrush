@@ -78,14 +78,14 @@ $(document).ready(function() {
     let bees = 20;
 
     const gridWidth = 4;
-    const gridHeight = 6;
+    const gridHeight = 7;
     const candyData = [
         { color: '#f7a6b6', img: 'assets/images/candy01.png' },
         { color: '#f8bfc6', img: 'assets/images/candy02.png' },
         { color: '#f9d7dd', img: 'assets/images/candy03.png' },
         { color: '#fae0e6', img: 'assets/images/candy04.png' },
         { color: '#EAA221', img: 'assets/images/candy05.png' },
-        // { color: '#E66E4C', img: 'assets/images/candy06.png' },
+        { color: '#E66E4C', img: 'assets/images/candy06.png' },
         // { color: '#E45561', img: 'assets/images/candy07.png' },
         // { color: '#E0218C', img: 'assets/images/candy08.png' },
     ];
