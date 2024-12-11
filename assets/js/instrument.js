@@ -17,7 +17,7 @@ function playNextTrack() {
 }
 
 let musicPlaying = false;
-$(document).mousemove(function () {
+$(document).on('click', function () {
     if (!musicPlaying) {
         musicPlaying = true;
         playNextTrack();
