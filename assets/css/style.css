@@ -386,3 +386,9 @@ body {
     background-color: #e0c97c;
     color: #fff;
 }
+.icon {
+    width: 20px; /* Adjust width */
+    height: 20px; /* Adjust height */
+    vertical-align: middle; /* Align with text */
+}
+
