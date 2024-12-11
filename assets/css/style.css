@@ -355,7 +355,7 @@ body {
     border-radius: 10px;
     padding: 10px;
     font-family: 'Arial', sans-serif;
-    font-size: 16px;
+    font-size: 20px;
     font-weight: bold;
     color: #333333;
     text-align: center;
@@ -387,8 +387,13 @@ body {
     color: #fff;
 }
 .icon {
-    width: 20px; /* Adjust width */
-    height: 20px; /* Adjust height */
+    width: 35px; /* Adjust width */
+    height: 35px; /* Adjust height */
     vertical-align: middle; /* Align with text */
+}
+.button-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 1px; /* Space between the icon and text */
 }
 
