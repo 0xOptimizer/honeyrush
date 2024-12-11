@@ -285,24 +285,13 @@ $(document).ready(function() {
                                 console.table('tile.special', tile.data('special'));
                                 // activatePowerup(tile, tile.special);
                             }
-                            setTimeout(function() {
-                                tile.css('background-color', 'gold');
-                            }, 75);
-                            setTimeout(function() {
-                                tile.css('background-color', tileBGColor);
-                            }, 150);
-                            setTimeout(function() {
-                                tile.css('background-color', 'gold');
-                            }, 225);
-                            setTimeout(function() {
-                                tile.fadeOut(150, function () {
-                                    updateTile(tile, newCandy);
-                                    if (isPowerup) {
-                                        createFloatingText(`Special powerup!`, x, y);
-                                    }
-                                    tile.fadeIn(150);
-                                });
-                            }, 300);
+                            tile.fadeOut(300, function () {
+                                updateTile(tile, newCandy);
+                                if (isPowerup) {
+                                    createFloatingText(`Special powerup!`, x, y);
+                                }
+                                tile.fadeIn(300);
+                            });
                         });
                         continue; // If a match is found, no need to check further
                     }
@@ -333,24 +322,13 @@ $(document).ready(function() {
                                 console.table('tile.special', tile.data('special'));
                                 // activatePowerup(tile, tile.special);
                             }
-                            setTimeout(function() {
-                                tile.css('background-color', 'gold');
-                            }, 75);
-                            setTimeout(function() {
-                                tile.css('background-color', tileBGColor);
-                            }, 150);
-                            setTimeout(function() {
-                                tile.css('background-color', 'gold');
-                            }, 225);
-                            setTimeout(function() {
-                                tile.fadeOut(150, function () {
-                                    updateTile(tile, newCandy);
-                                    if (isPowerup) {
-                                        createFloatingText(`Special powerup!`, x, y);
-                                    }
-                                    tile.fadeIn(150);
-                                });
-                            }, 300);
+                            tile.fadeOut(300, function () {
+                                updateTile(tile, newCandy);
+                                if (isPowerup) {
+                                    createFloatingText(`Special powerup!`, x, y);
+                                }
+                                tile.fadeIn(300);
+                            });
                         });
                         continue; // If a match is found, no need to check further
                     }
@@ -385,24 +363,13 @@ $(document).ready(function() {
                                 console.table('tile.special', tile.data('special'));
                                 // activatePowerup(tile, tile.special);
                             }
-                            setTimeout(function() {
-                                tile.css('background-color', 'gold');
-                            }, 75);
-                            setTimeout(function() {
-                                tile.css('background-color', tileBGColor);
-                            }, 150);
-                            setTimeout(function() {
-                                tile.css('background-color', 'gold');
-                            }, 225);
-                            setTimeout(function() {
-                                tile.fadeOut(150, function () {
-                                    updateTile(tile, newCandy);
-                                    if (isPowerup) {
-                                        createFloatingText(`Special powerup!`, x, y);
-                                    }
-                                    tile.fadeIn(150);
-                                });
-                            }, 300);
+                            tile.fadeOut(300, function () {
+                                updateTile(tile, newCandy);
+                                if (isPowerup) {
+                                    createFloatingText(`Special powerup!`, x, y);
+                                }
+                                tile.fadeIn(300);
+                            });
                         });
                         continue; // If a match is found, no need to check further
                     }
@@ -433,24 +400,13 @@ $(document).ready(function() {
                                 console.table('tile.special', tile.data('special'));
                                 // activatePowerup(tile, tile.special);
                             }
-                            setTimeout(function() {
-                                tile.css('background-color', 'gold');
-                            }, 75);
-                            setTimeout(function() {
-                                tile.css('background-color', tileBGColor);
-                            }, 150);
-                            setTimeout(function() {
-                                tile.css('background-color', 'gold');
-                            }, 225);
-                            setTimeout(function() {
-                                tile.fadeOut(150, function () {
-                                    updateTile(tile, newCandy);
-                                    if (isPowerup) {
-                                        createFloatingText(`Special powerup!`, x, y);
-                                    }
-                                    tile.fadeIn(150);
-                                });
-                            }, 300);
+                            tile.fadeOut(300, function () {
+                                updateTile(tile, newCandy);
+                                if (isPowerup) {
+                                    createFloatingText(`Special powerup!`, x, y);
+                                }
+                                tile.fadeIn(300);
+                            });
                         });
                         continue; // If a match is found, no need to check further
                     }

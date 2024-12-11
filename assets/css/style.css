@@ -21,11 +21,19 @@ body {
     position: relative;
     width: 100%;
     height: 100%;
-    transform: scale(clamp(75%, 100%, 100%));
     margin: 0 auto;
-    margin-left: -10px;
+    margin-top: 35px;
     display: block;
 }
+
+@media (max-width: 768px) {
+    #grid {
+        transform: scale(0.95);
+        transform-origin: top left;
+        margin-left: -8px;
+    }
+}
+
 .candy {
     position: absolute;
     width: 86.6px; /* Approx hex width for size 50 */
@@ -34,10 +42,14 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: 0.08s;
 }
 .candy img {
     max-width: 70%;
     max-height: 70%;
+}
+.candy.selected {
+    transform: scale(0.8);
 }
 .candy.selected::before {
     content: "";
