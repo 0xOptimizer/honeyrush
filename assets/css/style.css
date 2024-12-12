@@ -9,6 +9,7 @@
 
 html {
     height: 100%;
+    overflow: hidden;
 }
 body {
     background: rgb(255,249,175);
@@ -22,14 +23,15 @@ body {
     width: 100%; /* Full container width by default */
     height: calc(100% - 75px); 
     margin: 75px auto 0;
+    margin-top: 125px;
     display: block;
     padding: 1%; 
 }
 
 @media (max-width: 768px) {
     #grid {
-        width: calc(100% - 5%); /* Adjusts width proportionally */
         margin: 50px auto 0; 
+        margin-top: 80px;
         height: auto; 
     }
 }
@@ -442,7 +444,7 @@ body {
     border-style: solid;
     background-color: #f9f3d7;
     text-align: center;
-    width: 250px;
+    width: 305px;
 
     /* position: absolute;
     left: 70px;
@@ -605,8 +607,9 @@ body {
 
 .bee-emoji-container {
     position: absolute;
-    top: -13px;
-    right: -5px;
+    top: -24px;
+    left: 242px;
     transform: rotate(9deg);
     z-index: 999;
+    pointer-events: none;
 }
