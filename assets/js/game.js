@@ -437,6 +437,15 @@ $(document).ready(function() {
                 }
             }
         }
+        if (special === 'refill') {
+            const tileOffset = tile.offset();
+            const x = tileOffset.left + 25;
+            const y = tileOffset.top + 50;
+
+            createFloatingText(`+1 Move!`, x, y);
+            bees += 1;
+            checkBees();
+        }
     }    
 
     function checkMatches() {
