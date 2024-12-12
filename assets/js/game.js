@@ -747,9 +747,9 @@ $(document).ready(function() {
                 console.error('Error fetching leaderboard data:', xhr.responseText);
             }
         });
-    }    
+    }
 
-    $('.submit_score-btn').on('click', function() {
+    $(document).on('click', '.submit_score-btn', function() {
         const _this = this;
         const name = $('input[name="name"]').val();
         $(_this).attr('disabled', true);
@@ -764,10 +764,21 @@ $(document).ready(function() {
             success: function(response) {
                 console.log('Score submitted successfully:', response);
                 setTimeout(function() {
+                    const sfx = applause_sfx.cloneNode(true);
+                    sfx.volume = 0.55;
+                    sfx.play();
+                }, 300);
+                setTimeout(function() {
                     $(_this).html('<span class="text-outlined">Submitted!</span>');
                     $('.save-img').attr('src', 'assets/images/hi_SoulGIE.png').addClass('hi_there');
+                    
                     startConfetti();
                 }, 750);
+                setTimeout(function() {
+                    $(_this).attr('disabled', false);
+                    $(_this).html('<span class="text-outlined">Play Again!</span>');
+                    $(_this).removeClass('submit_score-btn').addClass('navigate-btn').attr('data-group', 'start');
+                }, 2000);
                 // setTimeout(function() {
                 //     $('.container-groups').fadeOut('fast');
                 // }, 85);
@@ -787,8 +798,18 @@ $(document).ready(function() {
         
     });
 
-    $('.start-menu-btn[data-group="game"]').on('click', function() {
+    $(document).on('click', '.navigate-btn[data-group="game"]', function() {
+        $('#grid').html('');
+        
         createGrid();
+        stopConfetti();
+
+        playerPoints = 0;
+        bees = 20;
+        $('.points').text(playerPoints.toString());
+        checkBees();
+
+        $('.save-screen-btn').removeClass('navigate-btn').addClass('submit_score-btn');
     });
     repopulateLeaderboard();
 });  

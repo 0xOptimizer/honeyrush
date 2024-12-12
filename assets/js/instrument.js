@@ -28,6 +28,7 @@ $(document).on('click', function () {
 const button_click_sfx = document.getElementById("button_click");
 const button_click_soft_sfx = document.getElementById("button_click_soft");
 const drop_sfx = document.getElementById("drop");
+const applause_sfx = document.getElementById("applause");
 
 $(document).ready(function() {
     $('button').on('click', function() {

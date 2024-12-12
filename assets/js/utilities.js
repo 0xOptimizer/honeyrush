@@ -15,7 +15,7 @@ function paginateUpdate(container) {
     $(container).find('.paginate-max-page').text(max_page);
 };
 $(document).ready(function() {
-    $('.navigate-btn').on('click', function() {
+    $(document).on('click', '.navigate-btn', function() {
         $('.navigate-btn').attr('disabled', true);
         const _this = this;
         const group = $(this).data('group');

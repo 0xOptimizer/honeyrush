@@ -366,7 +366,7 @@ body {
 }
 
 /* Style for "Submit Score" button */
-.container-groups[data-group="save"] .button-container .submit_score-btn {
+.container-groups[data-group="save"] .button-container .save-screen-btn {
     /* display: block;
     margin: 20px auto;
     padding: 15px 30px;
@@ -402,18 +402,18 @@ body {
 }
 
 @media (max-width: 375px) {
-    .container-groups[data-group="save"] .button-container .submit_score-btn {
+    .container-groups[data-group="save"] .button-container .save-screen-btn {
         font-size: 22px;
     }
 }
 
-.container-groups[data-group="save"] .button-container .submit_score-btn:hover {
+.container-groups[data-group="save"] .button-container .save-screen-btn:hover {
     background-color: #ff6399;
     box-shadow: 0 6px 12px rgba(255, 99, 153, 0.4);
     transform: scale(1.05);
 }
 
-.container-groups[data-group="save"] .button-container .submit_score-btn:active {
+.container-groups[data-group="save"] .button-container .save-screen-btn:active {
     transform: scale(0.95);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
