@@ -86,8 +86,8 @@ $(document).ready(function() {
         { color: '#fae0e6', img: 'assets/images/candy04.png' },
         { color: '#EAA221', img: 'assets/images/candy05.png' },
         { color: '#E66E4C', img: 'assets/images/candy06.png' },
-        // { color: '#E45561', img: 'assets/images/candy07.png' },
-        // { color: '#E0218C', img: 'assets/images/candy08.png' },
+        { color: '#E45561', img: 'assets/images/candy07.png' },
+        { color: '#E0218C', img: 'assets/images/candy08.png' },
     ];
     const powerupData = [
         { color: 'cyan', img: 'assets/images/powerup01.png', special: 'down' },
@@ -132,6 +132,11 @@ $(document).ready(function() {
                             queue: false
                         }
                     );
+                    setTimeout(() => {
+                        const sfx = drop_sfx.cloneNode(true);
+                        sfx.volume = 0.33;
+                        sfx.play();
+                    }, 175);
                 }, delay);
     
                 delay += 33;
@@ -206,12 +211,16 @@ $(document).ready(function() {
                         
                         createFloatingText(`<img src="assets/images/smoke_vectorsmarket15.png" width="128" height="128">`, x_ex, y_ex, {direction: "none"});
                         createFloatingText(`+${points.toString()}`, x, y);
+
+                        const sfx = button_click_soft_sfx.cloneNode(true);
+                        sfx.volume = 0.33;
+                        sfx.play();
     
                         belowTile.fadeOut(300, function () {
                             updateTile(belowTile, getRandomCandy());
                             belowTile.fadeIn(75);
                         });
-                    }, (r - row) * 500); // Delay for sequential effect
+                    }, (r - row) * 150); // Delay for sequential effect
                 }
             }
         }
@@ -283,7 +292,7 @@ $(document).ready(function() {
 
                             let newCandy;
                             let isPowerup = false;
-                            if (Math.random() < 0.08) {
+                            if (Math.random() <= 0.13) {
                                 newCandy = getRandomPowerup();
                                 isPowerup = true;
                             } else {
@@ -320,7 +329,7 @@ $(document).ready(function() {
 
                             let newCandy;
                             let isPowerup = false;
-                            if (Math.random() < 0.08) {
+                            if (Math.random() <= 0.13) {
                                 newCandy = getRandomPowerup();
                                 isPowerup = true;
                             } else {
@@ -361,7 +370,7 @@ $(document).ready(function() {
 
                             let newCandy;
                             let isPowerup = false;
-                            if (Math.random() < 0.08) {
+                            if (Math.random() <= 0.13) {
                                 newCandy = getRandomPowerup();
                                 isPowerup = true;
                             } else {
@@ -398,7 +407,7 @@ $(document).ready(function() {
 
                             let newCandy;
                             let isPowerup = false;
-                            if (Math.random() < 0.08) {
+                            if (Math.random() <= 0.13) {
                                 newCandy = getRandomPowerup();
                                 isPowerup = true;
                             } else {
@@ -467,11 +476,16 @@ $(document).ready(function() {
                 swapTiles(selectedTile, this);
             }
 
-            const sfx = button_click_sfx.cloneNode(true);
-            sfx.volume = 0.33;
-            sfx.play();
+            if (checkMatches()) {
+                const sfx = button_click_sfx.cloneNode(true);
+                sfx.volume = 0.33;
+                sfx.play();
+            } else {
+                const sfx = button_click_soft_sfx.cloneNode(true);
+                sfx.volume = 0.33;
+                sfx.play();
+            }
 
-            checkMatches()
             $(selectedTile).removeClass('selected');
             selectedTile = null;
 
