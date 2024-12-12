@@ -19,18 +19,18 @@ body {
 }
 #grid {
     position: relative;
-    width: 100%;
-    height: 100%;
-    margin: 0 auto;
-    margin-top: 75px;
+    width: 100%; /* Full container width by default */
+    height: calc(100% - 75px); 
+    margin: 75px auto 0;
     display: block;
+    padding: 1%; 
 }
 
 @media (max-width: 768px) {
     #grid {
-        transform: scale(0.95);
-        transform-origin: top left;
-        margin-left: 0px;
+        width: calc(100% - 5%); /* Adjusts width proportionally */
+        margin: 50px auto 0; 
+        height: auto; 
     }
 }
 
