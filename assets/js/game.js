@@ -75,7 +75,7 @@ function createFloatingText(text, x, y, options) {
 
 $(document).ready(function() {
     let playerPoints = 0;
-    let bees = 20;
+    let bees = 2;
 
     const gridWidth = 4;
     const gridHeight = 7;
@@ -96,6 +96,192 @@ $(document).ready(function() {
     const hexSize = 50;
     const hexWidth = Math.sqrt(3) * hexSize;
     const hexHeight = 2 * hexSize;
+
+    var random = Math.random,
+    cos = Math.cos,
+    sin = Math.sin,
+    PI = Math.PI,
+    PI2 = PI * 2,
+    timer = undefined,
+    frame = undefined,
+    confetti = [];
+    
+    var particles = 10,
+    spread = 40,
+    sizeMin = 3,
+    sizeMax = 12 - sizeMin,
+    eccentricity = 10,
+    deviation = 100,
+    dxThetaMin = -.1,
+    dxThetaMax = -dxThetaMin - dxThetaMin,
+    dyMin = .13,
+    dyMax = .18,
+    dThetaMin = .4,
+    dThetaMax = .7 - dThetaMin;
+    
+    var colorThemes = [
+        function() { return color(200 * random()|0, 200 * random()|0, 200 * random()|0); },
+        function() { var black = 200 * random()|0; return color(200, black, black); },
+        function() { var black = 200 * random()|0; return color(black, 200, black); },
+        function() { var black = 200 * random()|0; return color(black, black, 200); },
+        function() { return color(200, 100, 200 * random()|0); },
+        function() { return color(200 * random()|0, 200, 200); },
+        function() { var black = 256 * random()|0; return color(black, black, black); },
+    ];
+    
+    function color(r, g, b) {
+        return 'rgb(' + r + ',' + g + ',' + b + ')';
+    }
+    
+    function interpolation(a, b, t) {
+        return (1-cos(PI*t))/2 * (b-a) + a;
+    }
+    
+    var radius = 1/eccentricity, radius2 = radius+radius;
+    function createPoisson() {
+        var domain = [radius, 1-radius], measure = 1-radius2, spline = [0, 1];
+        while (measure) {
+            var dart = measure * random(), i, l, interval, a, b, c, d;
+            
+            for (i = 0, l = domain.length, measure = 0; i < l; i += 2) {
+                a = domain[i], b = domain[i+1], interval = b-a;
+                if (dart < measure+interval) {
+                    spline.push(dart += a-measure);
+                    break;
+                }
+                measure += interval;
+            }
+            c = dart-radius, d = dart+radius;
+            
+            for (i = domain.length-1; i > 0; i -= 2) {
+                l = i-1, a = domain[l], b = domain[i];
+                if (a >= c && a < d)
+                    if (b > d) domain[l] = d;
+                else domain.splice(l, 2);
+                else if (a < c && b > c)
+                    if (b <= d) domain[i] = c;
+                else domain.splice(i, 0, c, d);
+            }
+            
+            for (i = 0, l = domain.length, measure = 0; i < l; i += 2)
+                measure += domain[i+1]-domain[i];
+        }
+        
+        return spline.sort();
+    }
+    
+    var $container = $('<div></div>').css({
+        position: 'fixed',
+        top: '0',
+        left: '0',
+        width: '100%',
+        height: '0',
+        overflow: 'visible',
+        zIndex: '9999'
+    });
+    
+    function Confetto(theme) {
+        this.frame = 0;
+        this.$outer = $('<div></div>').css({
+            position: 'absolute',
+            width: (sizeMin + sizeMax * random()) + 'px',
+            height: (sizeMin + sizeMax * random()) + 'px',
+            perspective: '50px',
+            transform: 'rotate(' + (360 * random()) + 'deg)'
+        });
+        
+        this.$inner = $('<div></div>').css({
+            width: '100%',
+            height: '100%',
+            backgroundColor: theme()
+        });
+        
+        this.$outer.append(this.$inner);
+        this.axis = 'rotate3D(' + cos(360 * random()) + ',' + cos(360 * random()) + ',0,';
+        this.theta = 360 * random();
+        this.dTheta = dThetaMin + dThetaMax * random();
+        this.x = $(window).width() * random();
+        this.y = -deviation;
+        this.dx = sin(dxThetaMin + dxThetaMax * random());
+        this.dy = dyMin + dyMax * random();
+        
+        this.$outer.css({
+            left: this.x + 'px',
+            top: this.y + 'px'
+        });
+        
+        this.splineX = createPoisson();
+        this.splineY = [];
+        for (var i = 1, l = this.splineX.length-1; i < l; ++i)
+            this.splineY[i] = deviation * random();
+        this.splineY[0] = this.splineY[l] = deviation * random();
+        
+        this.update = function(height, delta) {
+            this.frame += delta;
+            this.x += this.dx * delta;
+            this.y += this.dy * delta;
+            this.theta += this.dTheta * delta;
+            
+            var phi = this.frame % 7777 / 7777, i = 0, j = 1;
+            while (phi >= this.splineX[j]) i = j++;
+            var rho = interpolation(
+                this.splineY[i],
+                this.splineY[j],
+                (phi-this.splineX[i]) / (this.splineX[j]-this.splineX[i])
+            );
+            phi *= PI2;
+            
+            this.$outer.css({
+                left: this.x + rho * cos(phi) + 'px',
+                top: this.y + rho * sin(phi) + 'px',
+                transform: this.axis + this.theta + 'deg)'
+            });
+            
+            return this.y > height+deviation;
+        };
+    }
+    
+    function startConfetti() {
+        if (!frame) {
+            $('body').append($container);
+            
+            var theme = colorThemes[0];
+            (function addConfetto() {
+                var confetto = new Confetto(theme);
+                confetti.push(confetto);
+                $container.append(confetto.$outer);
+                timer = setTimeout(addConfetto, spread * random());
+            })(0);
+            
+            var prev;
+            function loop(timestamp) {
+                var delta = prev ? timestamp - prev : 0;
+                prev = timestamp;
+                var height = $(window).height();
+                
+                for (var i = confetti.length-1; i >= 0; --i) {
+                    if (confetti[i].update(height, delta)) {
+                        confetti[i].$outer.remove();
+                        confetti.splice(i, 1);
+                    }
+                }
+                
+                if (timer || confetti.length)
+                    frame = requestAnimationFrame(loop);
+                else {
+                    $container.remove();
+                    frame = undefined;
+                }
+            }
+            
+            frame = requestAnimationFrame(loop);
+        }
+    }
+    
+    function stopConfetti() {
+        clearTimeout(timer);
+        timer = undefined;
+    }
 
     function createGrid() {
         const grid = $('#grid');
@@ -180,11 +366,22 @@ $(document).ready(function() {
                     $('.container-groups').fadeOut('fast');
                 }, 85);
                 setTimeout(function() {
-                    $(`.container-groups[data-group="save"]`).fadeIn('fast');
+                    $(`.container-groups[data-group="save"]`).show();
                     $('.navigate-btn').attr('disabled', false);
                     $('.page-groups').hide();
                     paginateUpdate(`.container-groups[data-group="save"]`);
-                }, 300);
+
+                    $(`.container-groups[data-group="save"]`).animate(
+                        {
+                            top: 0
+                        },
+                        {
+                            duration: 333,
+                            easing: 'easeOutCubic',
+                            queue: false
+                        }
+                    );
+                }, 500);
             }
         }, 400);
     }
@@ -520,7 +717,10 @@ $(document).ready(function() {
     }    
 
     $('.submit_score-btn').on('click', function() {
+        const _this = this;
         const name = $('input[name="name"]').val();
+        $(_this).attr('disabled', true);
+        $(_this).html('<span class="text-outlined">Submitting...</span>');
         $.ajax({
             url: 'https://honeyrush-api.tewi.club/api/score/submit', 
             type: 'POST',
@@ -531,14 +731,19 @@ $(document).ready(function() {
             success: function(response) {
                 console.log('Score submitted successfully:', response);
                 setTimeout(function() {
-                    $('.container-groups').fadeOut('fast');
-                }, 85);
-                setTimeout(function() {
-                    $(`.container-groups[data-group="start"]`).fadeIn('fast');
-                    $('.navigate-btn').attr('disabled', false);
-                    $('.page-groups').hide();
-                    paginateUpdate(`.container-groups[data-group="start"]`);
-                }, 300);
+                    $(_this).html('<span class="text-outlined">Submitted!</span>');
+                    $('.save-img').attr('src', 'assets/images/hi_SoulGIE.png').addClass('hi_there');
+                    startConfetti();
+                }, 750);
+                // setTimeout(function() {
+                //     $('.container-groups').fadeOut('fast');
+                // }, 85);
+                // setTimeout(function() {
+                //     $(`.container-groups[data-group="start"]`).fadeIn('fast');
+                //     $('.navigate-btn').attr('disabled', false);
+                //     $('.page-groups').hide();
+                //     paginateUpdate(`.container-groups[data-group="start"]`);
+                // }, 300);
 
                 repopulateLeaderboard();
             },
@@ -553,4 +758,4 @@ $(document).ready(function() {
         createGrid();
     });
     repopulateLeaderboard();
-});
+});  

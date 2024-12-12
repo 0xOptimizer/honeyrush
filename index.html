@@ -60,18 +60,21 @@
     </div>
 
     <!-- Input name -->
-    <div class="container-groups" data-group="save" style="display: none;">
-        <img src="assets/images/full_SoulGIE.png" alt="Game complete!" width="256" height="256">
+    <div class="container-groups" data-group="save" style="display: none; top: -500px;">
+        <img class="save-img" src="assets/images/full_SoulGIE.png" alt="Game complete!" width="256" height="256">
+        <div class="info" style="margin-top: 20px;">
+            <span class="points text-outlined">0</span>
+        </div>
         <div class="info" style="margin-top: 20px;">
             <label>Your name:</label>
-            <input type="text" name="name">
+            <input type="text" name="name" autocomplete="off">
         </div>
         <div class="button-container">
             <button type="button" class="submit_score-btn">
-                Submit Score!
+                <span class="text-outlined">Submit Score!</span>
             </button>
         </div>
-        <div id="grid"></div>
+        <div class="bee"></div>
     </div>
     
     <!-- <script>

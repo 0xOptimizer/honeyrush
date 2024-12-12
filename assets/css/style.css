@@ -108,7 +108,7 @@ body {
     border-color: #3e0219;
     border-style: solid;
     background-color: #f975c0;
-    color: gold; /* White text */
+    color: gold;
     font-family: 'Insaniburger';
     letter-spacing: 3px;
     transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
@@ -127,7 +127,7 @@ body {
     width: clamp(200px, 275px, 375px);
     padding: 8px;
     font-size: 26px;
-    color: #3e0219; /* White text */
+    color: #3e0219;
     font-family: 'Insaniburger';
     letter-spacing: 3px;
     text-align: center;
@@ -299,25 +299,50 @@ body {
 }
 .container-groups[data-group="save"] .info label {
     display: block;
-    font-size: 24px;
+    font-size: 42px;
     font-weight: bold;
     color: #ff6399;
     margin-bottom: 10px;
     text-align: center;
-    font-family: 'Comic Sans MS', cursive, sans-serif;
+    font-family: 'Bunny';
+}
+
+.container-groups[data-group="save"] .info .points {
+    width: 80%;
+    margin: 0 auto;
+    padding: 15px;
+    font-size: 28px;
+    color: gold;
+    font-family: 'Insaniburger';
+    letter-spacing: 1px;
+    outline: none;
+    transition: all 0.3s ease-in-out;
+    display: block;
+    text-align: center;
+}
+.container-groups[data-group="save"] .info .points::before {
+    content: ">  ";
+    color: #fff;
+    pointer-events: none;
+}
+.container-groups[data-group="save"] .info .points::after {
+    content: "  <";
+    color: #fff;
+    pointer-events: none;
 }
 
 .container-groups[data-group="save"] .info input[type="text"] {
     width: 80%;
     margin: 0 auto;
     padding: 15px;
-    font-size: 18px;
+    font-size: 28px;
     border-radius: 20px;
     border: 2px solid #ff91a4;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: #fff;
-    color: #7a4c75;
-    font-family: 'Arial', sans-serif;
+    color: #000;
+    font-family: 'Insaniburger';
+    letter-spacing: 1px;
     outline: none;
     transition: all 0.3s ease-in-out;
     display: block;
@@ -331,7 +356,7 @@ body {
 
 /* Style for "Submit Score" button */
 .container-groups[data-group="save"] .button-container .submit_score-btn {
-    display: block;
+    /* display: block;
     margin: 20px auto;
     padding: 15px 30px;
     font-size: 20px;
@@ -344,7 +369,25 @@ body {
     font-family: 'Comic Sans MS', cursive, sans-serif;
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease;
+    transition: all 0.3s ease; */
+
+    border-radius: 16px;
+    width: clamp(200px, 275px, 375px);
+    padding: 8px;
+    margin-left: 12px;
+    margin-top: 16px;
+    font-size: 28px;
+    border-top-width: 2px;
+    border-left-width: 2px;
+    border-right-width: 4px;
+    border-bottom-width: 4px;
+    border-color: #3e0219;
+    border-style: solid;
+    background-color: #f975c0;
+    color: gold;
+    font-family: 'Insaniburger';
+    letter-spacing: 3px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
 }
 
 .container-groups[data-group="save"] .button-container .submit_score-btn:hover {
@@ -489,10 +532,23 @@ body {
 @keyframes growProgressBar {
     0%, 33% { --pgPercentage: 0; }
     100% { --pgPercentage: var(--value); }
-  }
-  
-  @property --pgPercentage {
+}
+
+@property --pgPercentage {
     syntax: '<number>';
     inherits: false;
     initial-value: 0;
-  }
+}
+
+.hi_there {
+    animation: hi_there 1s ease;
+}
+
+@keyframes hi_there {
+    30% { transform: scale(1.2); }
+    40%, 60% { transform: rotate(-20deg) scale(1.2); }
+    50% { transform: rotate(20deg) scale(1.2); }
+    70% { transform: rotate(0deg) scale(1.2); }
+    100% { transform: scale(1); }
+}
+
