@@ -6,6 +6,10 @@
     font-family: 'Bunny';
     src: url('../fonts/SmallBunnyRegular.woff') format('woff');
 }
+@font-face {
+    font-family: 'Mont';
+    src: url('../fonts/Mont-ExtraLightDEMO.otf') format('otf');
+}
 
 html, body {
     /* overflow: hidden; */

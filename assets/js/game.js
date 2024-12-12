@@ -294,6 +294,7 @@ $(document).ready(function() {
     function createGrid() {
         const grid = $('#grid');
         let delay = 500;
+        let maxDelay = 0;
     
         for (let row = 0; row < gridHeight; row++) {
             for (let col = 0; col < gridWidth; col++) {
@@ -333,9 +334,17 @@ $(document).ready(function() {
                     }, 175);
                 }, delay);
     
+                maxDelay = delay;
                 delay += 33;
             }
         }
+    
+        setTimeout(() => {
+            if (!localStorage.getItem("has_viewed_tutorial_play")) {
+                $('.how_to_play-btn').trigger('click');
+            }
+            localStorage.setItem("has_viewed_tutorial_play", true);
+        }, maxDelay + 333);
     }
 
     function getRandomCandy() {
@@ -343,6 +352,12 @@ $(document).ready(function() {
     }
 
     function getRandomPowerup() {
+        setTimeout(() => {
+            if (!localStorage.getItem("has_viewed_tutorial_powerup")) {
+                $('.how_to_powerup-btn').trigger('click');
+            }
+            localStorage.setItem("has_viewed_tutorial_powerup", true);
+        }, 750);
         return powerupData[Math.floor(Math.random() * powerupData.length)];
     }
     function updateBeeEmoji() {
