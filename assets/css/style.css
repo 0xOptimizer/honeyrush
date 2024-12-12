@@ -22,7 +22,7 @@ body {
     width: 100%;
     height: 100%;
     margin: 0 auto;
-    margin-top: 35px;
+    margin-top: 75px;
     display: block;
 }
 
@@ -30,7 +30,7 @@ body {
     #grid {
         transform: scale(0.95);
         transform-origin: top left;
-        margin-left: -8px;
+        margin-left: 0px;
     }
 }
 
@@ -427,6 +427,24 @@ body {
 }
 .container-groups[data-group="game"] .info {
     position: absolute;
+    left: 7px;
+    top: 7px;
+    border-radius: 16px;
+    width: clamp(200px, 275px, 375px);
+    padding: 8px;
+    font-family: 'Bunny';
+    font-size: 28px;
+    border-top-width: 2px;
+    border-left-width: 2px;
+    border-right-width: 4px;
+    border-bottom-width: 4px;
+    border-color: #3e0219;
+    border-style: solid;
+    background-color: #f9f3d7;
+    text-align: center;
+    width: 250px;
+
+    /* position: absolute;
     left: 70px;
     top: 1px;
     background-color: #f9f3d7;
@@ -438,17 +456,29 @@ body {
     font-weight: bold;
     color: #333333;
     text-align: center;
-    width: 200px; /* Adjust based on your layout */
-    margin: 10px auto; /* Center alignment */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 200px;
+    margin: 10px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
   }
   .container-groups[data-group="game"] .info .points {
-    color: #ff8c00; /* Color for points */
+    color: gold; /* Color for points */
   }
-  .container-groups[data-group="game"] .info .bees {
-    color: #ffd700; /* Color for bees */
-  }
-  .how_to_play-btn {
+  .container-groups[data-group="game"] .info .points::before {
+    content: ">  ";
+    margin-right: 4px;
+    color: #fff;
+    pointer-events: none;
+}
+.container-groups[data-group="game"] .info .points::after {
+    content: "  <";
+    margin-left: 4px;
+    color: #fff;
+    pointer-events: none;
+}
+.container-groups[data-group="game"] .info .bees {
+    /* color: #ffd700; */ /* Color for bees */
+}
+.how_to_play-btn {
     background-color: #f9f3d7;
     border: 2px solid #e0c97c;
     border-radius: 5px;
@@ -540,6 +570,10 @@ body {
     initial-value: 0;
 }
 
+* {
+    margin: 0;
+}
+
 .hi_there {
     animation: hi_there 1s ease;
 }
@@ -552,3 +586,27 @@ body {
     100% { transform: scale(1); }
 }
 
+.topbar {
+    font-size: 24px;
+    font-family: 'Insaniburger';
+    letter-spacing: 1px;
+    color: #fff;
+    margin: 0px;
+    width: 100% + 4px;
+    padding: 4px;
+    padding-bottom: 8px;
+    background-color: #333333;
+    border-bottom: 4px solid #3e0219;
+}
+
+.bees-container {
+    margin-top: 4px;
+}
+
+.bee-emoji-container {
+    position: absolute;
+    top: -13px;
+    right: -5px;
+    transform: rotate(9deg);
+    z-index: 999;
+}

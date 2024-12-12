@@ -75,7 +75,7 @@ function createFloatingText(text, x, y, options) {
 
 $(document).ready(function() {
     let playerPoints = 0;
-    let bees = 2;
+    let bees = 20;
 
     const gridWidth = 4;
     const gridHeight = 7;
@@ -92,6 +92,14 @@ $(document).ready(function() {
     const powerupData = [
         { color: 'cyan', img: 'assets/images/powerup01.png', special: 'down' },
         { color: 'cyan', img: 'assets/images/powerup02.png', special: 'refill' },
+    ];
+    const beeEmojis = [
+        { img: 'assets/images/smile_SoulGIE.png', id: 'smile' },
+        { img: 'assets/images/love_SoulGIE.png', id: 'love' },
+        { img: 'assets/images/cool_SoulGIE.png', id: 'cool' },
+        { img: 'assets/images/scared_SoulGIE.png', id: 'scared' },
+        { img: 'assets/images/shocked_SoulGIE.png', id: 'shocked' },
+        { img: 'assets/images/smirk_SoulGIE.png', id: 'smirk' },
     ];
     const hexSize = 50;
     const hexWidth = Math.sqrt(3) * hexSize;
@@ -337,6 +345,12 @@ $(document).ready(function() {
     function getRandomPowerup() {
         return powerupData[Math.floor(Math.random() * powerupData.length)];
     }
+    function updateBeeEmoji() {
+        const emoji = beeEmojis[Math.floor(Math.random() * beeEmojis.length)];
+        $('.bee-emoji').attr('src', emoji.img);
+
+        return true;
+    }
 
     function updateTile(tile, candy) {
         $(tile).data('candy', candy);
@@ -388,6 +402,8 @@ $(document).ready(function() {
 
     function activatePowerup(tile, special) {
         let points = 0;
+
+        updateBeeEmoji();
 
         if (special === 'down') {
             const row = parseInt(tile.data('row'));
@@ -487,6 +503,8 @@ $(document).ready(function() {
                             createFloatingText(`+${points.toString()}`, x, y);
                             updatePoints(points);
 
+                            updateBeeEmoji();
+
                             let newCandy;
                             let isPowerup = false;
                             if (Math.random() <= 0.13) {
@@ -523,6 +541,8 @@ $(document).ready(function() {
                             points += 50;
                             createFloatingText(`+${points.toString()}`, x, y);
                             updatePoints(points);
+
+                            updateBeeEmoji();
 
                             let newCandy;
                             let isPowerup = false;
@@ -565,6 +585,8 @@ $(document).ready(function() {
                             createFloatingText(`+${points.toString()}`, x, y);
                             updatePoints(points);
 
+                            updateBeeEmoji();
+
                             let newCandy;
                             let isPowerup = false;
                             if (Math.random() <= 0.13) {
@@ -601,6 +623,8 @@ $(document).ready(function() {
                             points += 50;
                             createFloatingText(`+${points.toString()}`, x, y);
                             updatePoints(points);
+
+                            updateBeeEmoji();
 
                             let newCandy;
                             let isPowerup = false;

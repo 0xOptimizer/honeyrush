@@ -34,15 +34,20 @@
     <!-- Game container, hidden by default -->
     <div class="container-groups" data-group="game" style="display: none;">
         <div class="info">
-            <img src="assets/images/candy02.png" alt="Points Icon" class="icon" /> 
-            : <span class="points">0</span> | 
-            <img src="assets/images/candy03.png" alt="Bees Icon" class="icon" />
-            : <span class="bees">20</span> 
+            <div class="">
+                <span class="points text-outlined">0</span>
+            </div>
+            <div class="bees-container">
+                <span class=""><span class="bees">20</span> MOVES LEFT</span>
+            </div>
         </div>
         <div class="button-container">
             <button type="button" class="how_to_play-btn">
                 <img src="assets/images/mark.png" alt="Help Icon" class="button-icon" />
             </button>
+        </div>
+        <div class="bee-emoji-container">
+            <img class="bee-emoji" src="assets/images/smile_SoulGIE.png" width="164" height="164">
         </div>
         <div id="grid"></div>
     </div>
