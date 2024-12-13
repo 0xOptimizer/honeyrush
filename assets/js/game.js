@@ -772,7 +772,7 @@ $(document).ready(function() {
                     );
 
                     if (player_id == i.id) {
-                        row.find(`li[data-id="${i.id}"]`).css('background-color', '#ff0000');
+                        row.find(`li[data-id="${i.id}"]`).css('background-color', '#a3fff5');
                     }
                 });
             },

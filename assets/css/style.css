@@ -240,7 +240,7 @@ body {
 
 /* Leaderboard Rank */
 .leaderboard-list li::before {
-    content: "⭐"; 
+    /* content: "⭐";  */
     margin-right: 12px;
     font-size: 1.8em;
     color: #ff91a4; 
