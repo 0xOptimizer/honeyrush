@@ -17,14 +17,7 @@ function paginateUpdate(container) {
 $(document).ready(function() {
     $(document).on('click', '.navigate-btn', function() {
         $('.navigate-btn').attr('disabled', true);
-        const _this = this;
         const group = $(this).data('group');
-
-        $(this).find('.tewi-large-btn-icon').animate({
-            left: '+=1250',
-            duration: 75,                                            
-            easing: 'cubic-bezier(0.25, 0.1, 0.25, 1)'
-        });
 
         setTimeout(function() {
             $('.container-groups').fadeOut('fast');
@@ -32,14 +25,7 @@ $(document).ready(function() {
         setTimeout(function() {
             $(`.container-groups[data-group="${group}"]`).fadeIn('fast');
             $('.navigate-btn').attr('disabled', false);
-            current_page = 1;
-            $('.page-groups').hide();
             $(`.container-groups[data-group="${group}"]`).find(`.page-groups[data-page="${current_page}"]`).fadeIn('fast');
-            $(_this).find('.tewi-large-btn-icon').animate({
-                left: '-=1250',
-                duration: 0
-            });
-            paginateUpdate(`.container-groups[data-group="${group}"]`);
         }, 300);
     });
     $('.paginate-btn').on('click', function() {
@@ -179,6 +165,62 @@ $(document).ready(function() {
                 $("<button>", {
                     id: "closePowerupModal",
                     text: "Okay, let's go!",
+                    css: {
+                        marginTop: "16px",
+                        padding: "10px 20px",
+                        background: "#ff4081",
+                        fontSize: "24px",
+                        fontFamily: "Mont",
+                        color: "white",
+                        border: "none",
+                        borderRadius: "4px",
+                        cursor: "pointer"
+                    }
+                })
+            )
+        )
+    );
+    $("body").append(
+        $("<div>", {
+            id: "credits_screen",
+            css: {
+                display: "none",
+                position: "fixed",
+                top: 0,
+                left: 0,
+                width: "95%",
+                height: "100%",
+                background: "rgba(0, 0, 0, 0.5)",
+                zIndex: 9999
+            }
+        }).append(
+            $("<div>", {
+                css: {
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%) scale(0.8)",
+                    background: "white",
+                    width: "100%",
+                    padding: "20px",
+                    borderRadius: "8px",
+                    boxShadow: "0 5px 15px rgba(0,0,0,0.3)",
+                    fontFamily: "Bunny",
+                    textAlign: "center",
+                    transition: "transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55)"
+                }
+            }).append(
+                $("<h2>", { text: "Credits!", css: { margin: "0 0 12px", fontSize: "48px" } })
+            ).append(
+                $("<p>", { text: "Made by Harlene and Joshua", css: { fontSize: "24px", fontFamily: "Mont" }})
+            ).append(
+                $("<p>", { text: "-----", css: { fontSize: "24px", fontFamily: "Mont" }})
+            ).append(
+                $("<p>", { text: "-----", css: { fontSize: "24px", fontFamily: "Mont" }})
+            ).append(
+                $("<button>", {
+                    id: "closePowerupModal",
+                    text: "Take me back",
                     css: {
                         marginTop: "16px",
                         padding: "10px 20px",

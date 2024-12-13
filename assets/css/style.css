@@ -634,13 +634,27 @@ body {
 }
 
 .leaderboard-return-btn {
-    position: absolute;
-    bottom: 20px;
-    margin: 0 auto;
-
     border-radius: 16px;
-    width: 75%;
-    padding: 8px;
+    padding: 2px;
+    font-size: 32px;
+    border-top-width: 2px;
+    border-left-width: 2px;
+    border-right-width: 4px;
+    border-bottom-width: 4px;
+    border-color: #3e0219;
+    border-style: solid;
+    background-color: #f975c0;
+    color: gold;
+    font-family: 'Insaniburger';
+    letter-spacing: 3px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.multi-button-container button {
+    display: inline-block;
+    border-radius: 16px;
+    width: clamp(200px, 275px, 375px);
+    padding: 4px;
     margin-top: 12px;
     font-size: 32px;
     border-top-width: 2px;

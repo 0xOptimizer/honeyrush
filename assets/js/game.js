@@ -330,6 +330,7 @@ $(document).ready(function() {
                     setTimeout(() => {
                         const sfx = drop_sfx.cloneNode(true);
                         sfx.volume = 0.33;
+                        sfx.muted = isSoundMuted;
                         sfx.play();
                     }, 175);
                 }, delay);
@@ -442,6 +443,7 @@ $(document).ready(function() {
 
                         const sfx = button_click_soft_sfx.cloneNode(true);
                         sfx.volume = 0.33;
+                        sfx.muted = isSoundMuted;
                         sfx.play();
     
                         belowTile.fadeOut(300, function () {
@@ -715,6 +717,7 @@ $(document).ready(function() {
 
             const sfx = button_click_soft_sfx.cloneNode(true);
             sfx.volume = 0.33;
+            sfx.muted = isSoundMuted;
             sfx.play();
         } else {
             if (selectedTile !== this) {
@@ -724,10 +727,12 @@ $(document).ready(function() {
             if (checkMatches()) {
                 const sfx = button_click_sfx.cloneNode(true);
                 sfx.volume = 0.33;
+                sfx.muted = isSoundMuted;
                 sfx.play();
             } else {
                 const sfx = button_click_soft_sfx.cloneNode(true);
                 sfx.volume = 0.33;
+                sfx.muted = isSoundMuted;
                 sfx.play();
             }
 
@@ -795,6 +800,7 @@ $(document).ready(function() {
                 setTimeout(function() {
                     const sfx = applause_sfx.cloneNode(true);
                     sfx.volume = 0.55;
+                    sfx.muted = isSoundMuted;
                     sfx.play();
                 }, 300);
                 setTimeout(function() {

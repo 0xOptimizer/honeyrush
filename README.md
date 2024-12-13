@@ -5,6 +5,14 @@ Combine tiles to make the bees happy!
 
 ---
 
+## Game Features
+
+* Cute aesthetic,
+* Intuitive gameplay,
+* Online leaderboard
+
+---
+
 ## Front-end Design Principles
 
 ### General

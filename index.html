@@ -44,6 +44,17 @@
                     <span class="text-outlined">LEADERBOARD</span>
                 </button>
             </div>
+            <div class="multi-button-container">
+                <button type="button" class="mute-sound-btn start-menu-btn" data-active="false" style="width: 135px; background-color: rgba(252, 155, 223, 1);">
+                    <img src="assets/images/volume.png" width="24" height="24">
+                </button>
+                <button type="button" class="mute-music-btn start-menu-btn" data-active="false" style="width: 135px; background-color: rgba(252, 155, 223, 1);">
+                    <img src="assets/images/music.png" width="24" height="24">
+                </button>
+                <!-- <button type="button" class="settings-btn start-menu-btn" style="width: 110px; background-color: rgba(252, 155, 223, 1);">
+                    <img src="assets/images/star.png" width="24" height="24">
+                </button> -->
+            </div>
             <!-- <div class="start-menu-footer">
                 by Harlene & Josh
             </div> -->
@@ -77,7 +88,10 @@
     
     <!-- Leaderboard container, hidden by default -->
     <div class="container-groups" data-group="leaderboard" style="display: none;">
-        <h2>Leaderboard</h2>
+        <h2>
+            <span class="leaderboard-return-btn navigate-btn text-outlined" data-group="start">&nbsp;&lt;&nbsp;</span>
+            Leaderboard
+        </h2>
         <ul class="leaderboard-list">
             <li>Player 1: <span class="player-score">100</span></li>
             <li>Player 2: <span class="player-score">80</span></li>
@@ -85,9 +99,7 @@
             <li>Player 4: <span class="player-score">40</span></li>
             <li>Player 5: <span class="player-score">20</span></li>
         </ul>
-        <div class="leaderboard-return-btn navigate-btn" data-group="start">
-            <span class="text-outlined">Main Menu</span>
-        </div>
+        
     </div>
 
     <!-- Input name -->
