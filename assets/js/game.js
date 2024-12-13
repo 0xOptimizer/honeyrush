@@ -741,6 +741,7 @@ $(document).ready(function() {
 
     function repopulateLeaderboard() {
         const player_id = localStorage.getItem('leaderboard_id');
+        let leaderboard_count = 0;
         $.ajax({
             url: 'https://honeyrush-api.tewi.club/api/score/get',
             type: 'GET',
@@ -754,8 +755,15 @@ $(document).ready(function() {
                 
                 // Populate with new data
                 response.forEach(i => {
+                    leaderboard_count++;
+                    if (leaderboard_count > 10) {
+                        return;
+                    }
+
                     const row = leaderboardList.append(
-                        `<li data-id="${i.id}">${i.name}: <span class="player-score">${i.points}</span></li>`
+                        `<li data-id="${i.id}">
+                            ${i.name}: <span class="player-score">${i.points}</span>
+                        </li>`
                     );
 
                     if (player_id == i.id) {
@@ -797,7 +805,7 @@ $(document).ready(function() {
                 }, 750);
                 setTimeout(function() {
                     $(_this).attr('disabled', false);
-                    $(_this).html('<span class="text-outlined">Play Again!</span>');
+                    $(_this).html('<span class="text-outlined">Main Menu</span>');
                     $(_this).removeClass('submit_score-btn').addClass('navigate-btn').attr('data-group', 'start');
                 }, 2000);
                 // setTimeout(function() {

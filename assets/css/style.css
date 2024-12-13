@@ -206,8 +206,8 @@ body {
 
 /* Individual Leaderboard Items */
 .leaderboard-list li {
-    font-size: 1.6em;
-    padding: 20px;
+    font-size: 1.2em;
+    padding: 8px;
     background-color: #fffbf2;
     margin: 15px 0;
     border-radius: 20px;
@@ -631,4 +631,27 @@ body {
     .bee-emoji-container {
         left: 200px;
     }
+}
+
+.leaderboard-return-btn {
+    position: absolute;
+    bottom: 20px;
+    margin: 0 auto;
+
+    border-radius: 16px;
+    width: 75%;
+    padding: 8px;
+    margin-top: 12px;
+    font-size: 32px;
+    border-top-width: 2px;
+    border-left-width: 2px;
+    border-right-width: 4px;
+    border-bottom-width: 4px;
+    border-color: #3e0219;
+    border-style: solid;
+    background-color: #f975c0;
+    color: gold;
+    font-family: 'Insaniburger';
+    letter-spacing: 3px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
 }
