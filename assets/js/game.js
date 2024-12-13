@@ -740,6 +740,7 @@ $(document).ready(function() {
     });
 
     function repopulateLeaderboard() {
+        const player_id = localStorage.getItem('leaderboard_id');
         $.ajax({
             url: 'https://honeyrush-api.tewi.club/api/score/get',
             type: 'GET',
@@ -752,10 +753,14 @@ $(document).ready(function() {
                 leaderboardList.empty(); // Clear existing list
                 
                 // Populate with new data
-                response.forEach(player => {
-                    leaderboardList.append(
-                        `<li>${player.name}: <span class="player-score">${player.points}</span></li>`
+                response.forEach(i => {
+                    const row = leaderboardList.append(
+                        `<li data-id="${i.id}">${i.name}: <span class="player-score">${i.points}</span></li>`
                     );
+
+                    if (player_id == i.id) {
+                        row.find(`li[data-id="${i.id}"]`).css('background-color', '#ff0000');
+                    }
                 });
             },
             error: function(xhr) {
@@ -778,6 +783,7 @@ $(document).ready(function() {
              },
             success: function(response) {
                 console.log('Score submitted successfully:', response);
+                localStorage.setItem('leaderboard_id', response.id);
                 setTimeout(function() {
                     const sfx = applause_sfx.cloneNode(true);
                     sfx.volume = 0.55;
