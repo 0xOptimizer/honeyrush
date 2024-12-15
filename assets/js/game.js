@@ -832,7 +832,7 @@ $(document).ready(function() {
                 }
 
                 localStorage.setItem('leaderboard_id', JSON.stringify(player_ids));
-                
+
                 setTimeout(function() {
                     const sfx = applause_sfx.cloneNode(true);
                     sfx.volume = 0.55;
@@ -880,7 +880,9 @@ $(document).ready(function() {
         $('.points').text(playerPoints.toString());
         checkBees();
 
+        $('.save-screen-btn').attr('disabled', false);
         $('.save-screen-btn').removeClass('navigate-btn').addClass('submit_score-btn');
+        $('.save-screen-btn').html('<span class="text-outlined">Submit Score!</span>');
     });
     repopulateLeaderboard();
 });  
