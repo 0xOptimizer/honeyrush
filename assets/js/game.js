@@ -764,17 +764,22 @@ $(document).ready(function() {
                     if (leaderboard_count > 10) {
                         return;
                     }
-
+                
+                    let truncatedName = i.name;
+                    if (truncatedName.length > 16) {
+                        truncatedName = truncatedName.substring(0, 13) + '...';
+                    }
+                
                     const row = leaderboardList.append(
                         `<li data-id="${i.id}">
-                            ${i.name}: <span class="player-score">${i.points}</span>
+                            ${truncatedName}: <span class="player-score">${i.points}</span>
                         </li>`
                     );
-
+                
                     if (player_id == i.id) {
                         row.find(`li[data-id="${i.id}"]`).css('background-color', '#a3fff5');
                     }
-                });
+                });                
             },
             error: function(xhr) {
                 console.error('Error fetching leaderboard data:', xhr.responseText);
