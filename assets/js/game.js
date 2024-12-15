@@ -745,7 +745,22 @@ $(document).ready(function() {
     });
 
     function repopulateLeaderboard() {
-        const player_id = localStorage.getItem('leaderboard_id');
+        let player_ids = localStorage.getItem('leaderboard_id');
+    
+        // Ensure compatibility with old single-ID entries
+        if (player_ids) {
+            try {
+                player_ids = JSON.parse(player_ids);
+                if (!Array.isArray(player_ids)) {
+                    player_ids = [player_ids];
+                }
+            } catch (e) {
+                player_ids = [player_ids];
+            }
+        } else {
+            player_ids = [];
+        }
+        
         let leaderboard_count = 0;
         $.ajax({
             url: 'https://honeyrush-api.tewi.club/api/score/get',
@@ -776,7 +791,7 @@ $(document).ready(function() {
                         </li>`
                     );
                 
-                    if (player_id == i.id) {
+                    if (player_ids.includes(i.id)) {
                         row.find(`li[data-id="${i.id}"]`).css('background-color', '#a3fff5');
                     }
                 });                
@@ -801,7 +816,23 @@ $(document).ready(function() {
              },
             success: function(response) {
                 console.log('Score submitted successfully:', response);
-                localStorage.setItem('leaderboard_id', response.id);
+                let player_ids = localStorage.getItem('leaderboard_id');
+
+                try {
+                    player_ids = JSON.parse(player_ids);
+                    if (!Array.isArray(player_ids)) {
+                        player_ids = [player_ids];
+                    }
+                } catch (e) {
+                    player_ids = [player_ids];
+                }
+
+                if (!player_ids.includes(response.id)) {
+                    player_ids.push(response.id);
+                }
+
+                localStorage.setItem('leaderboard_id', JSON.stringify(player_ids));
+                
                 setTimeout(function() {
                     const sfx = applause_sfx.cloneNode(true);
                     sfx.volume = 0.55;
